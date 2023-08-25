@@ -309,7 +309,14 @@ class CheckoutController extends Controller
 
         // promo code discount
         $value = explode(',', Cart::subtotal());
-        $price = explode('.', $value[0] . ($value[1]) ? $value[1] : '');
+        if(isset($value[1])){
+            $price = explode('.', $value[0] . $value[1]);
+        }else{
+            $price = explode('.', $value[0]);
+        }
+        // $price = explode('.', $value[0]);
+
+        // dd($price);
         $discount = ($price[0] * $discount_apply) / 100;
         // end
         $discount_price = explode(',', $price[0] - $discount + $anuual_fee);
@@ -341,6 +348,7 @@ class CheckoutController extends Controller
                     'location' => $student_term->venueLocation(),
                     'date' => date('M d,Y', strtotime($student_term->getStartDate())) . ' to ' . date('M d,Y', strtotime($student_term->getEndDate())),
                 ];
+                dd($student_term->term->toArray());
                 $payment_email = [
                     'email' => $user->email,
                     'name' => $user->first_name . ' ' . $user->last_name,

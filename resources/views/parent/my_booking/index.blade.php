@@ -159,7 +159,9 @@
 
                                         <td>{{ $student_term->no_of_class }}
                                         </td>
-                                        <td>{{ date('M d, Y', strtotime($student_term->term?->start_date)) }}
+                                        <td>
+                                            {{-- date('M d, Y', strtotime($student_term->term?->start_date)) --}}
+                                            {{ date('M d, Y', strtotime($item->created_at)) }}
                                         </td>
                                         <td>{{ date('M d, Y', strtotime($student_term->term?->end_date)) }}
                                         </td>
@@ -173,7 +175,9 @@
                                         </td>
                                         <td>{{ $student_term->package?->no_of_class }}
                                         </td>
-                                        <td>{{ date('M d, Y', strtotime($student_term->package?->start_date)) }}
+                                        <td>
+                                            {{-- date('M d, Y', strtotime($student_term->package?->start_date)) --}}
+                                            {{ date('M d, Y', strtotime($item->created_at)) }}
                                         </td>
                                         <td>{{ date('M d, Y', strtotime($student_term->package?->end_date)) }}
                                         </td>
