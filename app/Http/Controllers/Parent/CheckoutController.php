@@ -309,7 +309,7 @@ class CheckoutController extends Controller
 
         // promo code discount
         $value = explode(',', Cart::subtotal());
-        $price = explode('.', $value[0] . $value[1]);
+        $price = explode('.', $value[0] . ($value[1]) ? $value[1] : '');
         $discount = ($price[0] * $discount_apply) / 100;
         // end
         $discount_price = explode(',', $price[0] - $discount + $anuual_fee);

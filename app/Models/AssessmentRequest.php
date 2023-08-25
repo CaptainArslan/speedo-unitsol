@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AssessmentRequest extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'user_id',
         'student_id',
@@ -76,7 +76,7 @@ class AssessmentRequest extends Model
     }
     public function getClassAndName()
     {
-        return  $this->student?->name . "
+        return  $this->student?->name . ' ' . $this->student?->last_name . "
         <br><span class='badge badge-success ml-2 text-white'>" . $this->class?->name . "</span>
         ";
     }

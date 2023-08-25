@@ -48,7 +48,7 @@ class StudentController extends Controller
                 ->map(function ($r, $key) {
                     $url = url(self::URL);
                     $delete_url = $this->toString($url . '/' . $r->id);
-                    $student_name = "{$r->studentName()}";
+                    $student_name = "{$r->getFullName()}";
                     $user=User::find(Auth::id());
                     if($user->can('detail_student')){
                         $name="<a href='$url/$r->id' class='toggle' data-target='editClass'><span>$student_name</span></a>";
