@@ -309,7 +309,7 @@ class CheckoutController extends Controller
 
         // promo code discount
         $value = explode(',', Cart::subtotal());
-        $price = explode('.', $value[0] . (isset($value[1]) ? $value[1] : ''));
+        $price = explode('.', $value[0] . $value[1]);
         $discount = ($price[0] * $discount_apply) / 100;
         // end
         $discount_price = explode(',', $price[0] - $discount + $anuual_fee);
@@ -330,11 +330,9 @@ class CheckoutController extends Controller
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
         $user->charge($pay_total[0], $paymentMethod);
-        // dd($user);
-        // Cart::destroy();
+        Cart::destroy();
         foreach ($order->orderDetail as $record_email) {
             foreach ($record_email->studentTerms->where('status', 'on') as $student_term) {
-
 
                 $booking_email = [
                     'email' => $user->email,
@@ -343,12 +341,9 @@ class CheckoutController extends Controller
                     'location' => $student_term->venueLocation(),
                     'date' => date('M d,Y', strtotime($student_term->getStartDate())) . ' to ' . date('M d,Y', strtotime($student_term->getEndDate())),
                 ];
-
-                dd($student_term?->trainerName());
-
                 $payment_email = [
                     'email' => $user->email,
-                    'name' => $user?->first_name . ' ' . $user?->last_name,
+                    'name' => $user->first_name . ' ' . $user->last_name,
                     'student_name' => $student_term->student?->name,
                     'payment' => $record_email->price,
                     'trainer' => $student_term->trainerName(),
@@ -357,7 +352,6 @@ class CheckoutController extends Controller
                     'level' => $student_term->getSwimmingClassName() . ' , ' . $student_term->getTime() . ' , ' .
                         $student_term->getClassType() . ' ( ' . $student_term->getTermDays() . ' )',
                 ];
-                dd($payment_email);
                 Mail::to($user->email)->send(new BookingConfirmationEmail($booking_email));
                 Mail::to($user->email)->send(new PaymentConfirmationEmail($payment_email));
             }

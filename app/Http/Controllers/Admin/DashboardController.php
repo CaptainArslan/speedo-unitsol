@@ -21,29 +21,30 @@ class DashboardController extends Controller
     public function __construct()
     {
         view()->share([
-            'url' => url('admin/dashbaord'),
+            'url'=>url('admin/dashbaord'),
         ]);
     }
     public function index(Request $request)
     {
-        $bookings = OrderDetial::ByVenue($request->venue_id)
-            ->ByClass($request->class_id)
-            ->where('type', null)
-            ->latest()->get()->take(10);
+        $bookings=OrderDetial::ByVenue($request->venue_id)
+        ->ByClass($request->class_id)
+        ->where('type', null)
+    ->latest()->get()->take(10);
         // dd($bookings);
         $sales = OrderDetial::ByVenue($request->venue_id)
             ->ByClass($request->class_id)
-            ->where('type', null)
-            ->where('created_at', '>', now()->subDays(30)->endOfDay())
-            ->get();
+        ->where('type', null)
+        ->where('created_at', '>', now()->subDays(30)->endOfDay())
+        ->get();
 
-        $sales_prices = $sales->pluck('price')->toArray();
-        $venues = Venue::all();
-        $classes = SwimmingClass::all();
-        return view(self::VIEW . '.dashboard.index', get_defined_vars());
+        $sales_prices =$sales->pluck('price')->toArray();
+        $venues=Venue::all();
+        $classes=SwimmingClass::all();
+        return view(self::VIEW . '.dashboard.index',get_defined_vars());
     }
     public function login()
     {
         return view(self::VIEW . '.auth.login');
     }
+
 }

@@ -1,61 +1,60 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\SaleController;
-use App\Http\Controllers\Admin\TermController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\ClassController;
-use App\Http\Controllers\Admin\EventController;
-use App\Http\Controllers\Admin\VenueController;
-use App\Http\Controllers\Parent\CartController;
-use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\TimingController;
-use App\Http\Controllers\Admin\BookingController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\TrainerController;
-use App\Http\Controllers\Admin\ScheduleController;
-use App\Http\Controllers\Parent\StudentController;
-use App\Http\Controllers\Admin\AssetTypeController;
-use App\Http\Controllers\Admin\ClassTypeController;
-use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\InventoryController;
-use App\Http\Controllers\Admin\PromoCodeController;
-use App\Http\Controllers\Parent\CheckoutController;
-use App\Http\Controllers\Parent\MyBookingController;
-use App\Http\Controllers\Admin\DesignationController;
-use App\Http\Controllers\Admin\InvoiceCycleController;
-use App\Http\Controllers\Admin\SubscriptionController;
-use App\Http\Controllers\Trainer\AssessmentController;
-use App\Http\Controllers\Trainer\AttendanceController;
-use App\Http\Controllers\Admin\ClassScheduleController;
-use App\Http\Controllers\Admin\BlackoutPeriodController;
-use App\Http\Controllers\Admin\FreeAssessmentController;
-use App\Http\Controllers\Admin\RoleBaseAccessController;
-use App\Http\Controllers\Parent\ManageBookingController;
-use App\Http\Controllers\Trainer\NewsBullitenController;
-use App\Http\Controllers\Admin\StaffManagementController;
-use App\Http\Controllers\Admin\TermBaseBookingController;
-use App\Http\Controllers\Parent\TrainerCommentController;
-use App\Http\Controllers\Trainer\ScheduleClassController;
-use App\Http\Controllers\Trainer\AccountSettingController;
-use App\Http\Controllers\Trainer\PasswordChangeController;
-use App\Http\Controllers\Trainer\StudentGradingController;
+use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\AssessmentRequestController;
+use App\Http\Controllers\Admin\BlackoutPeriodController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CancelationPolicyController;
-use App\Http\Controllers\Admin\ClassPromotRequestController;
-use App\Http\Controllers\Admin\EmployeeSchedulingController;
+use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\CustomerInformationController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmployeeSchedulingController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\InvoiceCycleController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PromoCodeController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\RoleBaseAccessController;
+use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StaffManagementController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\TimingController;
+use App\Http\Controllers\Admin\TrainerController;
+use App\Http\Controllers\Admin\VenueController;
+use App\Http\Controllers\Admin\AssetTypeController;
+use App\Http\Controllers\Admin\ClassPromotRequestController;
+use App\Http\Controllers\Admin\ClassScheduleController;
+use App\Http\Controllers\Admin\ClassTypeController;
+use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Admin\FreeAssessmentController;
 use App\Http\Controllers\Admin\ModerateTermBaseBookingController;
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
-use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
+use App\Http\Controllers\Admin\TermBaseBookingController;
+use App\Http\Controllers\Admin\TermController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Parent\CartController;
+use App\Http\Controllers\Parent\CheckoutController;
 use App\Http\Controllers\Parent\DashboardController as ParentDashboardController;
+use App\Http\Controllers\Parent\ManageBookingController;
+use App\Http\Controllers\Parent\MyBookingController;
+use App\Http\Controllers\Parent\StudentController;
+use App\Http\Controllers\Parent\TrainerCommentController;
+use App\Http\Controllers\Trainer\AccountSettingController;
+use App\Http\Controllers\Trainer\AssessmentController;
+use App\Http\Controllers\Trainer\AttendanceController;
 use App\Http\Controllers\Trainer\DashboardController as TrainerDashboardController;
 use App\Http\Controllers\Trainer\ManageBookingController as TrainerManageBookingController;
+use App\Http\Controllers\Trainer\NewsBullitenController;
+use App\Http\Controllers\Trainer\PasswordChangeController;
+use App\Http\Controllers\Trainer\ScheduleClassController;
+use App\Http\Controllers\Trainer\StudentGradingController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -444,29 +443,29 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('clear-cache', function () {
-    Artisan::call('optimize:clear');
+    \Artisan::call('optimize:clear');
     return back();
 });
 
 Route::get('migrate-fresh', function () {
-    Artisan::call('migrate:fresh');
+    \Artisan::call('migrate:fresh');
     dd("Migration Freshed");
 });
 Route::get('migrate', function () {
-    Artisan::call('migrate');
+    \Artisan::call('migrate');
     dd("Migration Completed");
 });
 
 Route::get('seed', function () {
-    Artisan::call('db:seed');
+    \Artisan::call('db:seed');
     dd("Seeding Completed");
 });
 
 Route::get('storage-link', function () {
-    Artisan::call('storage:link');
+    \Artisan::call('storage:link');
     dd("links Completed");
 });
 Route::get('passport-install', function () {
-    Artisan::call('passport-install');
+    \Artisan::call('passport-install');
     dd("links Completed");
 });
