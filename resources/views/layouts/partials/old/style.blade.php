@@ -36,30 +36,18 @@
         <![endif]-->
 
 
-     <link rel="stylesheet" href="{{asset("style.css")}}">
+    <link rel="stylesheet" href="{{asset("style.css")}}">
     <!-- The styles -->
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('speedo/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="https://www.hamiltonaquatics.ae/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="https://www.hamiltonaquatics.ae/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
-    <link href="{{ asset('speedo/css/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
-    
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/owl.theme.css" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('speedo/css/owl.theme.css') }}" rel="stylesheet" type="text/css" />
-    
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/animate.css" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('speedo/css/animate.css') }}" rel="stylesheet" type="text/css" />
-    
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/venobox.css" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('speedo/css/venobox.css') }}" rel="stylesheet" type="text/css" />
-    
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/styles.css" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('speedo/css/styles.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://www.hamiltonaquatics.ae/assets/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.hamiltonaquatics.ae/assets/css/owl.theme.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.hamiltonaquatics.ae/assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.hamiltonaquatics.ae/assets/css/venobox.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.hamiltonaquatics.ae/assets/css/styles.css" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('speedo/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="https://www.hamiltonaquatics.ae/assets/css/select2.min.css" rel="stylesheet" type="text/css" />-->
+
+    <link href="https://www.hamiltonaquatics.ae/assets/css/select2.min.css" rel="stylesheet" type="text/css" />
 
 
     <style>

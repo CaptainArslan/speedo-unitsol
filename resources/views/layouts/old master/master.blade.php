@@ -214,7 +214,10 @@
                         <p class="copyright-text"> Copyright © 2023. All Right Reserved - by Speedo Swim Squad | <a
                                 target="_blank" href="/Privacy_Policy.pdf">Privacy Policy</a></p>
                         <p class="copyright-text"> Powered by <a target="_blank"
-                                href="https://www.unitsol.com">UnitSol</a></p>
+                                href="https://www.esm.ae/solutions"><img
+                                    src="https://www.esm.ae/media/logos/esm-solutions.png" title="ESMsolution"
+                                    alt="Powered by ESM Solution logo"
+                                    style="width: 150px; height: auto; position: relative; top: 10px;"></a></p>
                     </div>
 
                 </div>

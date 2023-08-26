@@ -1,35 +1,40 @@
-<!--<link href="{{ asset('speedo/css/select2.min.css') }}" rel="stylesheet" type="text/css" />-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.min.js"></script>-->
-<script src="{{ asset('speedo/js/jquery.min.js') }}"></script>
-
-<script src="{{ asset('speedo/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('speedo/js/wow.min.js') }}"></script>
-<script src="{{ asset('speedo/js/jquery.backTop.min.js') }}"></script>
-<script src="{{ asset('speedo/js/waypoints.min.js') }}"></script>
-<script src="{{ asset('speedo/js/waypoints-sticky.min.js') }}"></script>
-<script src="{{ asset('speedo/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('speedo/js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('speedo/js/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('speedo/js/venobox.min.js') }}"></script>
-<script src="{{ asset('speedo/js/select2.min.js') }}"></script>
-
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/bootstrap.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/wow.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.backTop.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/waypoints.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/waypoints-sticky.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/owl.carousel.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.stellar.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.counterup.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/venobox.min.js"></script>-->
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/select2.min.js"></script>-->
-
-<!--<script src="https://www.hamiltonaquatics.ae/assets/js/custom-scripts.js"></script>-->
-
-<script src="{{ asset('speedo/js/custom-scripts.js') }}"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/bootstrap.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/wow.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.backTop.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/waypoints.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/waypoints-sticky.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/owl.carousel.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.stellar.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/jquery.counterup.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/venobox.min.js"></script>
+<script src="https://www.hamiltonaquatics.ae/assets/js/select2.min.js"></script>
 
 
-{{-- <script type="text/javascript">
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+<script src="https://www.hamiltonaquatics.ae/assets/js/custom-scripts.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127178313-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-127178313-1');
+
+    // new tag for lts free assessment
+    gtag('config', 'AW-808145150');
+
+</script>
+
+
+
+
+<script type="text/javascript">
 
     jQuery(function ($) {
 
@@ -222,8 +227,69 @@
 
 
 
-</script><!--script end--> --}}
+</script><!--script end-->
 
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV5BSPK" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-36647928-9', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+
+</script>
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    /*var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/579eee6692a0df3b7f436de2/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();*/
+</script>
+<!--End of Tawk.to Script-->
+
+
+
+<!-- Home - Facebook Pixel Code -->
+<script>
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3334386243332630');
+    fbq('track', 'PageView');
+    fbq('track', 'Contact');
+    fbq('track', 'StartAssessment', { value: '0.00', currency: 'USD', predicted_ltv: '0.00' });
+</script>
+<noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=3334386243332630&ev=PageView
+      &noscript=1" />
+</noscript>
+<!-- End Home - Facebook Pixel Code -->
 
 <script src="https://kit.fontawesome.com/79e469c33f.js" crossorigin="anonymous"></script>
 
