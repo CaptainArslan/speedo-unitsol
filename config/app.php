@@ -52,9 +52,11 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://127.0.0.1:8000'),
 
-    'asset_url' => env('ASSET_URL', 'https://speedo.bhattimobiles.com/public'),
+    'asset_url' => env('ASSET_URL', 'http://127.0.0.1:8000'),
+
+    // 'asset_url' => env('ASSET_URL', 'https://speedo.bhattimobiles.com/public'),
 
     /*
     |--------------------------------------------------------------------------
