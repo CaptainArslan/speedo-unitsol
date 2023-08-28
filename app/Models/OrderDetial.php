@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderDetial extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $fillable=[
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
         'order_id',
         'product_id',
         'student_id',
@@ -20,16 +20,19 @@ class OrderDetial extends Model
         'size',
     ];
 
-    public function student(){
+    public function student()
+    {
         return $this->belongsTo(Student::class, 'student_id');
     }
     // public function user(){
     //     return $this->hasManyThrough(Order::class, 'order_');
     // }
-    public function order(){
+    public function order()
+    {
         return $this->belongsTo(Order::class, 'order_id');
     }
-    public function term(){
+    public function term()
+    {
         return $this->belongsTo(TermBaseBooking::class, 'product_id', 'id');
     }
     public function package()
@@ -46,30 +49,33 @@ class OrderDetial extends Model
     }
     public function studentTermsActive()
     {
-        return $this->hasOne(StudentTerm::class, 'order_detial_id', 'id')->where('status','on');
+        return $this->hasOne(StudentTerm::class, 'order_detial_id', 'id')->where('status', 'on');
     }
 
-    public function bookingName(){
-        if($this->type == 'term'){
-            $name = $this->term?$this->term->name:'' ;
-        }else{
-            $name = $this->package?$this->package->name:'' ;
+    public function bookingName()
+    {
+        if ($this->type == 'term') {
+            $name = $this->term ? $this->term->name : '';
+        } else {
+            $name = $this->package ? $this->package->name : '';
         }
         return  "<span class='badge badge-dot badge-primary'>$name</span>";
     }
-    public function getPrice(){
-        if($this->type == 'term'){
+    public function getPrice()
+    {
+        if ($this->type == 'term') {
             $price = $this->price;
-        }else{
+        } else {
             $price = $this->price;
         }
         return  "<span class='badge badge-primary ml-2 text-white'>AED $price</span>";
     }
 
-    public function getStatus(){
-        if($this->type == 'term'){
+    public function getStatus()
+    {
+        if ($this->type == 'term') {
             $status = 'Paid';
-        }else{
+        } else {
             $status = 'Paid';
         }
         return  "<span class='badge badge-success ml-2 text-white'>$status</span>";
@@ -77,11 +83,11 @@ class OrderDetial extends Model
 
     public function customerName()
     {
-        if($this->type == 'term'){
+        if ($this->type == 'term') {
             $user = $this->order?->user;
             $first = substr($user?->first_name, 0, 1);
             $last = substr($user?->last_name, 0, 1);
-        }else{
+        } else {
             $user = $this->order?->user;
             $first = substr($user?->first_name, 0, 1);
             $last = substr($user?->last_name, 0, 1);
@@ -95,10 +101,11 @@ class OrderDetial extends Model
                    </div>
                   </div>";
     }
-    public function productName(){
+    public function productName()
+    {
         $user = $this->order->user;
-        $name=$this->product->name;
-        $image_name=env('APP_IMAGE_URL') . 'product/'.$this->product->getFirstImage();
+        $name = $this->product->name;
+        $image_name = env('APP_IMAGE_URL') . 'product/' . $this->product->getFirstImage();
         return
             "<div class='row'>
                 <div class='col-1'>
@@ -115,11 +122,12 @@ class OrderDetial extends Model
                 </div>
             </div> ";
     }
-    public function productCustomer(){
+    public function productCustomer()
+    {
         $user = $this->order->user;
-        $image=asset('admin-assets/images/avatar/b-sm.jpg');
+        $image = asset('admin-assets/images/avatar/b-sm.jpg');
         return
-        "<div class='row'>
+            "<div class='row'>
              <div class='col-4'>
                 <div class='user-avatar'>
                     <img src='$image' alt=''>
@@ -130,11 +138,13 @@ class OrderDetial extends Model
             </div>
         </div>";
     }
-    public function productPrice(){
-            $price = $this->price;
+    public function productPrice()
+    {
+        $price = $this->price;
         return  "<span class='badge badge-primary ml-2 text-white'>AED $price</span>";
     }
-    public function productStatus(){
+    public function productStatus()
+    {
         $status = 'Sold';
         return  "<span class='badge badge-success ml-2 text-white'>$status</span>";
     }
@@ -143,7 +153,7 @@ class OrderDetial extends Model
     {
         if (isset($venue_id)) {
             $query->whereHas('studentTerms.term', function ($q) use ($venue_id) {
-                $q->where('venue_id',$venue_id);
+                $q->where('venue_id', $venue_id);
             });
         }
         return  $query;
@@ -160,7 +170,7 @@ class OrderDetial extends Model
     {
         if (isset($class_id)) {
             $query->whereHas('studentTerms.term', function ($q) use ($class_id) {
-                $q->where('swimming_class_id',$class_id);
+                $q->where('swimming_class_id', $class_id);
             });
         }
         return  $query;

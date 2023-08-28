@@ -34,7 +34,7 @@ class Order extends Model
         }
         $name = array_unique($name_array);
         // dd($name);
-        return implode(',',$name);
+        return implode(',', $name);
         // return $name;
     }
     public function getTotal()
@@ -53,7 +53,7 @@ class Order extends Model
             $term_array[] = $item->name;
             // $term_name .= $item->name . ',';
         }
-        $term_name=array_unique($term_array);
-        return implode(',',$term_name);
+        $term_name = array_unique($term_array);
+        return implode(',', $term_name);
     }
 }

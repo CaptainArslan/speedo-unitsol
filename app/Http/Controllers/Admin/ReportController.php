@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderDetial;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,13 +24,14 @@ class ReportController extends Controller
         view()->share([
             'url' => url(self::URL),
             'title' => self::TITLE,
+            'image_url' => env('APP_IMAGE_URL') . 'product',
         ]);
     }
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('view_report'), Response::HTTP_FORBIDDEN, 'Forbidden');
-
-        return view(self::VIEW . '.index');
+        $orders  = Order::get();
+        return view(self::VIEW . '.index', get_defined_vars());
     }
 
     /**

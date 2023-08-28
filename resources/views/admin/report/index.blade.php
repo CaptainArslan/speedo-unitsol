@@ -23,14 +23,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1"
-                                data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                             <div class="toggle-expand-content" data-content="pageMenu">
                                 <ul class="nk-block-tools g-3">
                                     <li class="nk-block-tools-opt">
-                                        <a href="#"
-                                            class="toggle btn btn-primary d-none d-md-inline-flex"><em
-                                                class="icon ni ni-search"></em><span>Find
+                                        <a href="#" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-search"></em><span>Find
                                                 Report</span></a>
                                     </li>
                                 </ul>
@@ -43,74 +40,265 @@
             <div class="nk-block nk-block-lg">
                 <div class="card card-preview">
                     <div class="card-inner">
-                        <table class="datatable-init-export nowrap table"
-                            data-export-title="Export">
+                        <table class="datatable-init-export nowrap table" data-export-title="Export">
                             <thead>
                                 <tr>
-                                    <th>Order#</th>
-                                    <th>Customer Name</th>
-                                    <th>Subscription Modal</th>
-                                    <th>Subscription Date</th>
-                                    <th>Subscription Fee</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>#Order Number</th>
+                                    <th>Account Name</th>
+                                    <th>Swimmer Name</th>
+                                    <th>Term</th>
+                                    <th>Amount</th>
+                                    {{-- <th>Created At</th> --}}
+                                    <th>Attachment</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @foreach ($orders as $order)
+                                <?php
+                                // $i = 1;
+                                ?>
                                 <tr>
-                                    <td>123</td>
+
+
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->user?->first_name . ' ' . $order->user?->last_name }}</td>
+                                    <td>{{ '('.$order->getStudentNames().')' }}</td>
+                                    <td>{{ '('.$order->getTermName().')' }}</td>
+                                    <td>{{ $order->getTotal() }}</td>
+                                    {{-- <td>{{ $order->created_at->format('M d ,Y') }}</td> --}}
                                     <td>
-                                        <div class="user-card">
-                                            <div
-                                                class="user-avatar bg-dim-primary d-none d-sm-flex">
-                                                <span>MA</span>
-                                            </div>
-                                            <div class="user-info">
-                                                <span class="tb-lead">Muhammad Arslan<span
-                                                        class="dot dot-success d-md-none ml-1"></span></span>
-                                                <!-- <span>info@softnio.com</span> -->
+                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#invoice{{ $order->id }}">
+                                            <em class="icon ni ni-invest"></em>
+                                        </button>
+                                        {{-- <a href="{{ url('parent/order_details/' . $order->id) }}"
+                                        class="btn btn-sm btn-info">
+                                        <em class="icon ni ni-eye "></em>
+                                        </a> --}}
+                                        <div class="modal" id="invoice{{ $order->id }}" tabindex="-{{ $order->id }}" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-body center" role="document">
+                                                <div class="modal-content w-95">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">
+                                                            Invoice
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <h4 class="float-end font-size-16">
+                                                                                    Order #
+                                                                                    {{ $order->id }}
+                                                                                </h4>
+
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="mb-4">
+                                                                                    <h4 class="float-right">
+                                                                                        SpeedoSwim</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6">
+                                                                                <h6>Billed To:</h6>
+                                                                                <p>{{ $order->user?->first_name . ' ' . $order->user?->last_name }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6">
+                                                                                <h6>Payment Method:</h6>
+                                                                                <p>Card</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="py-2 mt-3">
+                                                                            <h3 class="font-size-15 font-weight-bold">
+                                                                                Order summary</h3>
+                                                                        </div>
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-nowrap">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th></th>
+                                                                                        <th>Name</th>
+                                                                                        <th>Student</th>
+                                                                                        <th>Venue</th>
+                                                                                        <th>Day</th>
+                                                                                        <th>Time</th>
+                                                                                        <th>Lessons</th>
+                                                                                        <th>Start Date</th>
+                                                                                        <th>End Date</th>
+                                                                                        <th>Price</th>
+                                                                                        <th>Qty</th>
+                                                                                        <th>Total</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php
+                                                                                    $sub_total = 0;
+                                                                                    $i = 1;
+                                                                                    ?>
+                                                                                    @foreach ($order->orderDetail as $item)
+                                                                                    <tr>
+                                                                                        <td>{{ $i }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @if ($item->type == 'product')
+                                                                                            <div class="user-avatar sq">
+                                                                                                <img src="{{ $image_url . '/' . $item->product?->getFirstImage() }}" alt="" class="thumb">
+                                                                                            </div>
+                                                                                            @else
+                                                                                            <div class="user-avatar sq bg-gray-dim">
+                                                                                                <span>{{ substr($item->name, 0, 1) }}</span>
+                                                                                            </div>
+                                                                                            @endif
+                                                                                        </td>
+                                                                                        <td>{{ $item->name }}
+                                                                                        </td>
+
+                                                                                        @foreach ($item->studentTerms->where('status', 'on') as $student_term)
+                                                                                        <td>{{ $student_term->student ? $student_term->student->name : '' }}
+                                                                                        </td>
+                                                                                        @if ($student_term->type == 'term')
+                                                                                        <td>{{ $student_term->term?->venue->name }}
+                                                                                        </td>
+                                                                                        <td>{{ $student_term->day }}</td>
+                                                                                        <td>{{ $student_term->term?->dayNames() }}
+                                                                                        </td>
+                                                                                        <td>{{ $student_term->term?->timing->name . ' at ' . date('h:i A', strtotime($student_term->term?->timing->start_time)) }}
+                                                                                        </td>
+
+                                                                                        <td>{{ $student_term->no_of_class }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{-- date('M d, Y', strtotime($student_term->term?->start_date)) --}}
+                                                                                            {{ date('M d, Y', strtotime($item->created_at)) }}
+                                                                                        </td>
+                                                                                        <td>{{ date('M d, Y', strtotime($student_term->term?->end_date)) }}
+                                                                                        </td>
+                                                                                        @endif
+                                                                                        @if ($student_term->type == 'package')
+                                                                                        <td>{{ $student_term->package?->term->venue->name }}
+                                                                                        </td>
+                                                                                        <td>{{ $student_term->package?->term->dayNames() }}
+                                                                                        </td>
+                                                                                        <td>{{ $student_term->package?->term->timing->name . ' at ' . date('h:i A', strtotime($student_term->package?->term->timing->start_time)) }}
+                                                                                        </td>
+                                                                                        <td>{{ $student_term->package?->no_of_class }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{-- date('M d, Y', strtotime($student_term->package?->start_date)) --}}
+                                                                                            {{ date('M d, Y', strtotime($item->created_at)) }}
+                                                                                        </td>
+                                                                                        <td>{{ date('M d, Y', strtotime($student_term->package?->end_date)) }}
+                                                                                        </td>
+                                                                                        @endif
+                                                                                        <td>{{ $item->price }}
+                                                                                        </td>
+                                                                                        <td>{{ $item->qty }}
+                                                                                        </td>
+                                                                                        <td>{{ $item->price }}
+                                                                                        </td>
+                                                                                        @endforeach
+
+                                                                                        @if ($item->type == 'product')
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td>{{ $item->price }}
+                                                                                        </td>
+                                                                                        <td>{{ $item->qty }}
+                                                                                        </td>
+                                                                                        <td>{{ $item->price * $item->qty }}
+                                                                                        </td>
+                                                                                        @endif
+
+                                                                                        {{-- <td></td> --}}
+
+                                                                                    </tr>
+                                                                                    <?php
+                                                                                    $i++;
+                                                                                    $sub_total += $item->price * $item->qty;
+                                                                                    ?>
+                                                                                    @endforeach
+
+
+                                                                                </tbody>
+                                                                                <tfoot>
+                                                                                    <tr>
+                                                                                        <td colspan="10" class="border-0 ">
+                                                                                        </td>
+                                                                                        <td colspan="1" class="border-0 ">
+                                                                                            <h6>Sub Total
+                                                                                            </h6>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $sub_total }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td colspan="10">
+                                                                                        </td>
+                                                                                        <td colspan="1">
+                                                                                            <h6>Discount
+                                                                                            </h6>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $order->discount }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td colspan="10" class="border-0 ">
+                                                                                        </td>
+                                                                                        <td colspan="1">
+                                                                                            <h6>Tax</h6>
+                                                                                        </td>
+                                                                                        <td> {{ $order?->tax }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td colspan="10" class="border-0 ">
+                                                                                        </td>
+                                                                                        <td colspan="1">
+                                                                                            <h6>Total</h6>
+                                                                                        </td>
+                                                                                        <td>AED
+                                                                                            {{ $sub_total + $order?->tax - $order->discount }}
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                </tfoot>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <span class="badge badge-dot badge-primary">Baby Ducks - (2
-                                            - 3 Years) - Evening</span>
-                                    </td>
-                                    <td>June 25, 2022</td>
-                                    <td><span
-                                            class="badge badge-primary ml-2 text-white">$350</span>
-                                    </td>
-                                    <td><span
-                                            class="badge badge-success ml-2 text-white">Paid</span>
-                                    </td>
-
-                                    <td>
-                                        <ul class="nk-tb-actions gx-1">
-                                            <li>
-                                                <a href="html/invoice-print.html" target="_blank"
-                                                    class="btn btn-icon btn-white btn-dim btn-sm btn-primary"><em
-                                                        class="icon ni ni-printer-fill"></em></a>
-                                                <div class="drodown">
-                                                    <a href="#"
-                                                        class="dropdown-toggle btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="dropdown"><em
-                                                            class="icon ni ni-more-h"></em></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul class="link-list-opt no-bdr">
-                                                            <li><a href="html/invoice-details.html"><em
-                                                                        class="icon ni ni-eye"></em><span>View</span></a>
-                                                            </li>
-                                                            <li><a href="#"><em
-                                                                        class="icon ni ni-trash"></em><span>Delete</span></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </td>
                                 </tr>
+                                @endforeach
+
                             </tbody>
+
                         </table>
                     </div>
                 </div><!-- .card-preview -->
@@ -120,5 +308,20 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('admin-assets/assets/js/libs/datatable-btns.js?ver=2.9.0') }}"></script>
+<script src="{{ asset('admin-assets/assets/js/libs/datatable-btns.js?ver=2.9.0') }}"></script>
+
+<script>
+    function printReport() {
+        var printableContent = document.querySelector("table");
+        printElement(printableContent);
+    }
+
+    function printElement(element) {
+        var originalContents = document.body.innerHTML;
+        var printContents = element.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
 @stop
