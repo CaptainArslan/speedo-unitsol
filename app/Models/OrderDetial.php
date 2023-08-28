@@ -104,8 +104,8 @@ class OrderDetial extends Model
     public function productName()
     {
         $user = $this->order->user;
-        $name = $this->product->name;
-        $image_name = env('APP_IMAGE_URL') . 'product/' . $this->product->getFirstImage();
+        $name = $this->product?->name;
+        $image_name = env('APP_IMAGE_URL') . 'product/' . $this->product?->getFirstImage();
         return
             "<div class='row'>
                 <div class='col-1'>

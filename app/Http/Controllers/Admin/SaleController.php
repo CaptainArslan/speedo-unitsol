@@ -35,7 +35,7 @@ class SaleController extends Controller
                 ->map(function ($r, $key) {
                     $url = url(self::URL);
                     $delete_url = $this->toString($url . '/' . $r->id);
-                    $data = "{$r->productName()}";
+                    $data = "{$r?->productName()}";
                     $name="<a href='#' class='toggle' data-target='editClass'><span>$data</span></a>";
                     $actions = '';
                     $actions .= "

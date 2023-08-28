@@ -54,14 +54,14 @@
                             </thead>
                             <tbody>
 
-                                @foreach ($orders as $order)
+                                @foreach ($orders as $key => $order)
                                 <?php
                                 // $i = 1;
                                 ?>
                                 <tr>
 
 
-                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $order->user?->first_name . ' ' . $order->user?->last_name }}</td>
                                     <td>{{ '('.$order->getStudentNames().')' }}</td>
                                     <td>{{ '('.$order->getTermName().')' }}</td>
