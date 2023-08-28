@@ -39,7 +39,7 @@
                     </div><!-- .nk-block-head -->
                     <div class="nk-block nk-block-lg">
                         <div class="card card-preview">
-                            <div class="card-inner">
+                            <div class="card-inner table-responsive">
                                 <table id="myTable" class=" nowrap table">
                                     <thead>
                                         <tr>

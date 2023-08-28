@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-12">
                     <div class="form-group">
-                        <label class="form-label" for="product-title">Class Occurence<sup class="text-danger">*</sup></label>
+                        <label class="form-label" for="product-title">Class Occurrence<sup class="text-danger">*</sup></label>
                         <div class="form-control-wrap">
                             <input type="text" name="class_occurrence" required class="form-control" id="product-title">
                         </div>

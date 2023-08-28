@@ -61,7 +61,7 @@ class ClassScheduleController extends Controller
                     }
                     $show=$user->can('show_class_scedule')?
                         "<li><a href='$url/$r->id' class='toggle' data-target='editClass'><em
-                        class='icon ni ni-eye'></em><span>Edit</span></a>
+                        class='icon ni ni-edit'></em><span>Edit</span></a>
                         </li>":"";
                     
                     $actions = '';
@@ -122,7 +122,7 @@ class ClassScheduleController extends Controller
             $term_students=$term->termStudents;
         }else{
             $term=TermBaseBookingPackage::find($id);
-            $term_students = $term->packageStudents;
+            $term_students = $term?->packageStudents;
         }
         return view(self::VIEW . '.show', get_defined_vars());
     }

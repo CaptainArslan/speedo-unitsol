@@ -44,7 +44,7 @@
                                     <tr>
                                         <th>Class type#</th>
                                         <th>Name</th>
-                                        <th>Class Occurence#</th>
+                                        <th>Class Occurrence#</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

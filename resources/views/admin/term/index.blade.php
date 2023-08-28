@@ -37,7 +37,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nmae</th>
+                                        <th>Name</th>
                                         <th>Duration</th>
                                         <th>Blackout</th>
                                         <th>Actions</th>
