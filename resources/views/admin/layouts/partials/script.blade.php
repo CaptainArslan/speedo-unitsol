@@ -5,7 +5,8 @@
 <script src="{{ asset('admin-assets/assets/js/example-sweetalert.js') }}"></script>
 <script src="{{ asset('js/notify.js') }}"></script>
 <script src="{{ asset('js/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('js/my-custom.js') }}"></script>
+<!-- <script src="{{ asset('js/my-custom.js') }}"></script> -->
+<script src="{{ asset('speedo/js/my-custom.js') }}"></script>
 <script src="{{ asset('assets/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('assets/image-uploader/image-uploader.min.js') }}"></script>
 <script>

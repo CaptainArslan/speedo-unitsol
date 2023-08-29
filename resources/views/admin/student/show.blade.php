@@ -16,8 +16,8 @@
                         </div>
                     </div>
                     <div class="nk-block-head-content">
-                        <a href="html/product-list.html" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
-                        <a href="html/product-list.html" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                        <a href="/admin/students" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                        <a href="/admin/students" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
                     </div>
                 </div>
             </div><!-- .nk-block-head -->
@@ -190,7 +190,7 @@
                         <th>#</th>
                         <th>Term Name</th>
                         <th>Class Name</th>
-                        <th>venue</th>
+                        <th>Venue</th>
                         <th>Time</th>
                         <th>Today Class</th>
                         <th>Lessons remaining</th>
@@ -251,7 +251,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Trainer</th>
-                        <th>venue</th>
+                        <th>Venue</th>
                         <th>Date</th>
                         <th>Day</th>
                         <th>Time</th>

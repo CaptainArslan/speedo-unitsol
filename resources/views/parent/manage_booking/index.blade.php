@@ -185,7 +185,7 @@
                                                             class="" name="student_id[]" value="{{ $student->id }}"
                                                             placeholder="Search Product by Name">
                                                         <div class="us-dot" style="background-color: {{$color}} !important;"></div>
-                                                        {{ $student->name }}
+                                                        {{ $student->name .' '.$student->last_name }}
                                                     </li>
                                                 @endforeach
                                             </ul>

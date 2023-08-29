@@ -216,7 +216,7 @@
                                 <div class="row us-row-margin">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label class="form-label us-label" for="cf-full-name">Floor/Appartment or
+                                            <label class="form-label us-label" for="cf-full-name">Floor/Apartment or
                                                 Villa No </label>
                                             <input name="villa_no" value="{{ $user->villa_no }}"
                                                 class="form-control us-height">

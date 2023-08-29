@@ -4,7 +4,8 @@
 <script src="{{ asset('parent-assets/assets/js/example-sweetalert.js') }}"></script>
 <script src="{{ asset('js/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('js/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('js/my-custom.js') }}"></script>
+<!-- <script src="{{ asset('js/my-custom.js') }}"></script> -->
+<script src="{{ asset('speedo/js/my-custom.js') }}"></script>
 <script>
     $('.select2').select2();
 </script>

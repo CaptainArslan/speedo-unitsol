@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
     <!-- Page Title  -->
@@ -59,18 +58,18 @@
             @include('parent.layouts.partials.cart_footer')
         @endif --}}
         @if (request()->is('parent/students'))
-            @include('parent.layouts.partials.student_footer')
+        @include('parent.layouts.partials.student_footer')
         @endif
         @if (request()->is('parent/profile') |
-                request()->is('parent/security') |
-                request()->is('parent/payment') |
-                request()->is('parent/my-bookings') |
-                request()->is('parent/my-privilege') |
-                request()->is('parent/trainer-comments') |
-                request()->is('parent/checkouts') |
-                request()->is('parent/shops') |
-                request()->is('parent/manage-bookings'))
-            @include('parent.layouts.partials.footer')
+        request()->is('parent/security') |
+        request()->is('parent/payment') |
+        request()->is('parent/my-bookings') |
+        request()->is('parent/my-privilege') |
+        request()->is('parent/trainer-comments') |
+        request()->is('parent/checkouts') |
+        request()->is('parent/shops') |
+        request()->is('parent/manage-bookings'))
+        @include('parent.layouts.partials.footer')
         @endif
         <!-- app-root @e -->
         <!-- JavaScript -->
@@ -85,86 +84,87 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Your Cart</h5>
                     </div>
+                    @if (Cart::count())
                     <div id="cart_detail">
                         @foreach (Cart::content() as $item)
-                            <?php
-                            if ($item->options->type == 'term') {
-                                $student = App\Models\Student::find($item->options->student_id);
-                                $term = App\Models\TermBaseBooking::find($item->id);
-                                $venue = $term->venue?->name;
-                                $class = $term->class?->name;
-                            }
-                            // dd($term);
-                            ?>
-                            @if ($item->options->type != 'product')
-                                <div class="speedo-class">
-                                    <div class="class-left-side">
-                                        <div style="font-size: 16px;font-weight: 500;">
-                                            {{ $student->getFullName() }} </div>
-                                        <div style="font-size: 16px;font-weight: 500;">{{ $item->name }}
-                                        </div>
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
-                                            {{ 'Class: ' . $class }} </div>
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
-                                            {{ 'Location: ' . $venue }} </div>
-
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
-                                            {{ 'Start Date: ' . $item->options->start_date }}
-                                        </div>
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
-                                            {{ 'Day: ' . $item->options->day }}
-                                        </div>
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
-                                            {{ 'Time: ' . $item->options->time }} </div>
-                                        <div style="width: 100%;font-size: 12px;color: #949494;float: left;"><sup
-                                                class="text-danger">*</sup> Lessons:
-                                            {{ $item->options->no_of_class }} - {{ $item->options->time_total }} min
-                                        </div>
-
-
-                                    </div>
-
-                                    <div class="class-right-side">
-                                        <sup class="text-danger">*</sup>
-                                        <div class="class-price">AED {{ $item->price }} </div>
-                                    </div>
-                                    <div class="class-right-side">
-                                        <div class="class-price"> <a href="javascript:void(0)" class="pull-right"
-                                                onclick="cartDelete(event,'{{ url('parent/cart/' . $item->id) }},{{ $item->rowId }}')">
-                                                <em class="icon ni ni-trash"></em></a></div>
-                                    </div>
-
+                        <?php
+                        if ($item->options->type == 'term') {
+                            $student = App\Models\Student::find($item->options->student_id);
+                            $term = App\Models\TermBaseBooking::find($item->id);
+                            $venue = $term->venue?->name;
+                            $class = $term->class?->name;
+                        }
+                        // dd($term);
+                        ?>
+                        @if ($item->options->type != 'product')
+                        <div class="speedo-class">
+                            <div class="class-left-side">
+                                <div style="font-size: 16px;font-weight: 500;">
+                                    {{ $student->getFullName() }}
                                 </div>
-                            @else
-                                <div class="mt-2 speedo-product">
-                                    <div class="product-left">
-                                        <img src="" width="40" height="auto" style="overflow: hidden;" />
-                                        <span style="font-size: 15px;font-weight: 500;">{{ $item->name }}</span>
-                                    </div>
-
-                                    <div class="product-right">
-                                        <span>AED {{ $item->price }}</span>
-                                        <span>X</span>
-                                        <span>{{ $item->qty }} <a href="javascript:void(0)" class="pull-right"
-                                                onclick="cartDelete(event,'{{ url('parent/cart/' . $item->id) }},{{ $item->rowId }}')">
-                                                <em class="icon ni ni-trash"></em></a></span>
-                                    </div>
-
+                                <div style="font-size: 16px;font-weight: 500;">{{ $item->name }}
                                 </div>
-                            @endif
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
+                                    {{ 'Class: ' . $class }}
+                                </div>
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
+                                    {{ 'Location: ' . $venue }}
+                                </div>
+
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
+                                    {{ 'Start Date: ' . $item->options->start_date }}
+                                </div>
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
+                                    {{ 'Day: ' . $item->options->day }}
+                                </div>
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;">
+                                    {{ 'Time: ' . $item->options->time }}
+                                </div>
+                                <div style="width: 100%;font-size: 12px;color: #949494;float: left;"><sup class="text-danger">*</sup> Lessons:
+                                    {{ $item->options->no_of_class }} - {{ $item->options->time_total }} min
+                                </div>
+
+
+                            </div>
+
+                            <div class="class-right-side">
+                                <sup class="text-danger">*</sup>
+                                <div class="class-price">AED {{ $item->price }} </div>
+                            </div>
+                            <div class="class-right-side">
+                                <div class="class-price"> <a href="javascript:void(0)" class="pull-right" onclick="cartDelete(event,'{{ url('parent/cart/' . $item->id) }},{{ $item->rowId }}')">
+                                        <em class="icon ni ni-trash"></em></a></div>
+                            </div>
+
+                        </div>
+                        @else
+                        <div class="mt-2 speedo-product">
+                            <div class="product-left">
+                                <img src="" width="40" height="auto" style="overflow: hidden;" />
+                                <span style="font-size: 15px;font-weight: 500;">{{ $item->name }}</span>
+                            </div>
+
+                            <div class="product-right">
+                                <span>AED {{ $item->price }}</span>
+                                <span>X</span>
+                                <span>{{ $item->qty }} <a href="javascript:void(0)" class="pull-right" onclick="cartDelete(event,'{{ url('parent/cart/' . $item->id) }},{{ $item->rowId }}')">
+                                        <em class="icon ni ni-trash"></em></a></span>
+                            </div>
+
+                        </div>
+                        @endif
                         @endforeach
                     </div>
-
                     <div class="speedo-checkout">
-
-                        <a class="btn text-white pull-left mr-2" style="background-color:#3097FF !important"
-                            href="#" data-dismiss="modal">Add More
+                        <a class="btn text-white pull-left mr-2" style="background-color:#3097FF !important" href="#" data-dismiss="modal">Add More
                             Classes</a>
-                        <a class="btn  text-white  pull-right" style="background-color:#3097FF !important"
-                            href="{{ url('parent/checkouts') }}">Checkout-></a>
+                        <a class="btn  text-white  pull-right" style="background-color:#3097FF !important" href="{{ url('parent/checkouts') }}">Checkout-></a>
                     </div>
-
-
+                    @else
+                    <div class="text-center mt-2">
+                        <h5>Your cart is empty</h5>
+                    </div>
+                    @endif
                 </div>
             </div>
 

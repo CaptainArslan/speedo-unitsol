@@ -58,7 +58,7 @@
                                     <td class="nk-tb-col">
                                         <div class="user-card">
                                             <div class="user-info">
-                                                <span class="tb-lead">{{ $item->student?->name }}<span
+                                                <span class="tb-lead">{{ $item->student?->name .' '. $item->student?->last_name }}<span
                                                         class="dot dot-success d-md-none ml-1"></span></span>
                                                 <span>{{ $item->student?->relation }}</span>
                                             </div>

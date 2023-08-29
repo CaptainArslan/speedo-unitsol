@@ -361,7 +361,7 @@
                                                                             <input type="checkbox" checked
                                                                                 name="user_payment_information_id"
                                                                                 value="{{ $latest_payment->id }}"
-                                                                                class="from-control mr-4">
+                                                                                class="from-control mr-2">
                                                                             <em class="icon ni ni-visa"></em>
                                                                             <span><span class="cc-pay-star">****
                                                                                     **** ****</span> 4242</span>
