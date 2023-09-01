@@ -176,8 +176,6 @@
                 } else {
                     $('#medical').css('display', 'none');
                 }
-
-
             });
             $('#studentData').on('change', function(e) {
                 if (e.target.checked == true) {
