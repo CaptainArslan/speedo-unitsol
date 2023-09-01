@@ -1,98 +1,92 @@
 @extends('admin.layouts.master')
 @section('style')
-    <title>{{ $title }} | Swimming Pool Management System</title>
+<title>{{ $title }} | Swimming Pool Management System</title>
 @stop
 @section('content')
-    <div class="container-fluid">
-        <div class="nk-content-inner">
-            <div class="nk-content-body">
-                <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-between">
-                        <div class="nk-block-head-content">
-                            <h3 class="nk-block-title page-title">Customer Info</h3>
-                            <div class="nk-block-des text-soft">
-                            </div>
-                        </div><!-- .nk-block-head-content -->
-
-                    </div><!-- .nk-block-between -->
-                </div><!-- .nk-block-head -->
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Customer Info</h3>
+                        <div class="nk-block-des text-soft">
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="">
+                        <a href="{{ url('admin/customer-informations/'.$customer->id.'/student/add') }}" class="btn btn-primary d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add New student</span></a>
+                    </div><!-- .nk-block-head-content -->
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block nk-block-lg">
                 <div class="nk-block nk-block-lg">
-                    <div class="nk-block nk-block-lg">
-                        <div class="card card-preview">
-                            <div class="nk-block">
-                                <div class="card-inner">
-                                    <div class="row g-3">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="product-title">First
-                                                    Name</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="text" disabled name="first_name" value="{{ $customer->first_name }}"
-                                                        class="form-control" id="product-title">
-                                                </div>
+                    <div class="card card-preview">
+                        <div class="nk-block">
+                            <div class="card-inner">
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="product-title">First
+                                                Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" disabled name="first_name" value="{{ $customer->first_name }}" class="form-control" id="product-title">
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="product-title">Middle
-                                                    Name</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="text" disabled name="middle_name"
-                                                        value="{{ $customer->middle_name }}" class="form-control"
-                                                        id="product-title">
-                                                </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="product-title">Middle
+                                                Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" disabled name="middle_name" value="{{ $customer->middle_name }}" class="form-control" id="product-title">
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="product-title">Last
-                                                    Name</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="text" disabled name="last_name" value="{{ $customer->last_name }}"
-                                                        class="form-control" id="product-title">
-                                                </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="product-title">Last
+                                                Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" disabled name="last_name" value="{{ $customer->last_name }}" class="form-control" id="product-title">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="regular-price">Email</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="email" disabled name="email" value="{{ $customer->email }}"
-                                                        class="form-control" id="regular-price">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="regular-price">Email</label>
+                                            <div class="form-control-wrap">
+                                                <input type="email" disabled name="email" value="{{ $customer->email }}" class="form-control" id="regular-price">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="sale-price">Contact</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="text" disabled name="contact_number"
-                                                        value="{{ $customer->contact_number }}" class="form-control"
-                                                        id="sale-price">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="sale-price">Contact</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" disabled name="contact_number" value="{{ $customer->contact_number }}" class="form-control" id="sale-price">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label" for="sale-price">Date Of Birth</label>
-                                                <div class="form-control-wrap">
-                                                    <input type="date" disabled name="dob" value="{{ $customer->dob }}"
-                                                        class="form-control" id="sale-price">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="sale-price">Date Of Birth</label>
+                                            <div class="form-control-wrap">
+                                                <input type="date" disabled name="dob" value="{{ $customer->dob }}" class="form-control" id="sale-price">
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="form-label" for="sale-price">Address</label>
-                                                <div class="form-control-wrap">
-                                                    <textarea type="text" disabled name="address" class="form-control" id="sale-price">{{ $customer->address }}</textarea>
-                                                </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="sale-price">Address</label>
+                                            <div class="form-control-wrap">
+                                                <textarea type="text" disabled name="address" class="form-control" id="sale-price">{{ $customer->address }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     <div class="card card-preview">
                         <div class="card-inner">
                             <table id='myTable' class="nowrap table">
@@ -118,8 +112,8 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
+    @endsection
+    @section('scripts')
     <script src="{{ asset('admin-assets/assets/js/libs/datatable-btns.js?ver=2.9.0') }}"></script>
     <script>
         $(function() {
@@ -188,4 +182,4 @@
 
         });
     </script>
-@stop
+    @stop

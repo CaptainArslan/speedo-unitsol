@@ -277,10 +277,17 @@ Route::middleware('super_admin')->prefix('admin')->group(function () {
     // end  timing urls
     // customer-informations
     Route::get('customer-informations', [CustomerInformationController::class, 'index']);
+    Route::get('customer-informations/create', [CustomerInformationController::class, 'create']);
+    Route::post('customer-informations/store', [CustomerInformationController::class, 'store']);
     Route::get('customer-informations/{id}', [CustomerInformationController::class, 'show']);
     Route::get('customer-informations/{id}/edit', [CustomerInformationController::class, 'edit']);
     Route::post('customer-informations/{id}', [CustomerInformationController::class, 'update']);
     Route::delete('customer-informations/{id}', [CustomerInformationController::class, 'destroy']);
+
+    Route::get('customer-informations/{id}/student/add', [CustomerInformationController::class, 'getStudent']);
+    Route::post('customer-informations/student/store', [CustomerInformationController::class, 'addStudent']);
+
+    Route::post('get_area', [ParentDashboardController::class, 'getArea']);
 
     // end customer-informations urls
     // promo-codes urls
