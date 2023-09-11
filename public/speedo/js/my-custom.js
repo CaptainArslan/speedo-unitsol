@@ -345,10 +345,28 @@ function cartDelete(e, url, rowid) {
             $('#cart_detail').html('');
             $('#cart_detail').html(response);
             $('#cartView').modal('hide')
-
         }
     });
-
+}
+function adminCartDelete(e, url, rowid) {
+    loadingStart()
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        method: "post",
+        data: { rowId: rowid },
+        success: function (response) {
+            loadingStop();
+            showSuccess('Cart Delete Successfully', 'success');
+            $('#cart_detail').html('');
+            $("#cart_detail").html(response);
+        }
+    });
 }
 function emptyCart(e, url, rowid) {
     loadingStart()
@@ -365,6 +383,28 @@ function emptyCart(e, url, rowid) {
         success: function (response) {
             loadingStop()
 
+            showSuccess(response.message, 'success')
+            setTimeout(function () {
+                window.location.href = response.url;
+            }, 1500);
+        }
+    });
+
+}
+function adminEmptyCart(e, url) {
+    loadingStart()
+
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        method: "post",
+        success: function (response) {
+            loadingStop()
             showSuccess(response.message, 'success')
             setTimeout(function () {
                 window.location.href = response.url;

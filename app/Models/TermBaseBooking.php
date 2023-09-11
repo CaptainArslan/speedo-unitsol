@@ -48,7 +48,7 @@ class TermBaseBooking extends Model
     public function venue()
     {
         return $this->belongsTo(Venue::class, 'venue_id', 'id')->withTrashed();
-    } 
+    }
     public function term()
     {
         return $this->belongsTo(Term::class, 'term_id', 'id');
@@ -138,6 +138,13 @@ class TermBaseBooking extends Model
     {
         if (isset($class)) {
             return  $query->whereIn('swimming_class_id', $class);
+        }
+        return $query;
+    }
+    public function scopeByOneClass($query, $class)
+    {
+        if (isset($class)) {
+            return  $query->where('swimming_class_id', $class);
         }
         return $query;
     }
@@ -435,5 +442,15 @@ class TermBaseBooking extends Model
             }
         }
         return $record;
+    }
+
+    public function getTermDays($term)
+    {
+        $daysHtml = '';
+        if (!empty($term) && $term->termBaseBookingDays->count() > 0) {
+            $days = $term->termBaseBookingDays->pluck('name')->toArray();
+            $daysHtml = implode(', ', $days);
+        }
+        return $daysHtml;
     }
 }

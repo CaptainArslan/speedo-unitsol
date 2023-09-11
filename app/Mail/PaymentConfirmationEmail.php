@@ -12,6 +12,7 @@ class PaymentConfirmationEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $job_post;
+    public $user;
 
     public function __construct($user)
     {

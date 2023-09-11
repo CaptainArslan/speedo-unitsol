@@ -48,9 +48,9 @@ class StudentTerm extends Model
     }
     public function trainerName(){
         if($this->type == 'term'){
-            $name = $this->term?->venue?$this->term?->user->first_name:'' ;
+            $name = $this->term?->venue ? $this->term?->user?->first_name : '';
         }else{
-            $name = $this->package?->term ? $this->package->term?->user->first_name : '';
+            $name = $this->package?->term ? $this->package->term?->user?->first_name : '';
         }
         return $name;
     }

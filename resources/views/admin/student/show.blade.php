@@ -162,7 +162,7 @@
                                     </div>
                                 </div> --}}
 
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label class="form-label" for="product-title"></label>
                                         <div class="form-control-wrap">
@@ -170,6 +170,18 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- <div class="col-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="product-title"></label>
+                                        <div class="form-control-wrap">
+                                            <a href="{{ url('admin/students/'.$student->id.'/student-booking') }}" class="btn btn-primary">
+                                                <em class="icon ni ni-edit"></em>
+                                                <span>Manage Booking</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> --}}
 
                             </div>
                             </form>

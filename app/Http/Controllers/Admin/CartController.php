@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Parent;
+namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
+use App\Models\TermBaseBooking;
 use App\Http\Controllers\Controller;
 use App\Mail\IncompeteCheckoutEmail;
-use App\Models\Package;
-use App\Models\Product;
-use App\Models\TermBaseBooking;
-use App\Models\TermBaseBookingPackage;
-use Illuminate\Http\Request;
-use Cart;
+use App\Models\Student;
 use Illuminate\Support\Facades\Mail;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -68,7 +66,7 @@ class CartController extends Controller
             // );
             $carts = Cart::content();
             $count = Cart::count();
-            return view('parent.manage_booking.partial.cart_detail', get_defined_vars());
+            return view('admin.student_booking.partial.cart_detail', get_defined_vars());
         } else {
             return response()->json(
                 [
@@ -175,19 +173,18 @@ class CartController extends Controller
     {
         $rowId = explode(',', $id);
         Cart::remove($rowId[1]);
-        // $carts = Cart::content();
+        $carts = Cart::content();
         $count = Cart::count();
-        return view('parent.manage_booking.partial.cart_detail', get_defined_vars());
+        return view('admin.student_booking.partial.cart_detail', get_defined_vars());
     }
-    public function emptyCart()
+    public function emptyCart($parent_id)
     {
-        $user = auth()->user();
         Cart::destroy();
-        Mail::to($user->email)->send(new IncompeteCheckoutEmail($user));
+        // Mail::to($user->email)->send(new IncompeteCheckoutEmail($user));
         return response()->json(
             [
                 'success' => true,
-                'url' => url('parent/manage-bookings'),
+                'url' => url('admin/customer-informations/' . $parent_id . '/student-booking'),
                 'message' => 'Cart Empty Successfully'
             ],
             200

@@ -15,6 +15,7 @@
                     </div><!-- .nk-block-head-content -->
                     <div class="">
                         <a href="{{ url('admin/customer-informations/'.$customer->id.'/student/add') }}" class="btn btn-primary d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add New student</span></a>
+                        <a href="{{ url('admin/customer-informations/'.$customer->id.'/student-booking') }}" class="btn btn-primary d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Manage Booking</span></a>
                     </div><!-- .nk-block-head-content -->
                 </div><!-- .nk-block-between -->
             </div><!-- .nk-block-head -->
