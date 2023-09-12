@@ -4,6 +4,7 @@ use App\Http\Controllers\Trainer\Api\AssessmentController;
 use App\Http\Controllers\Api\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Trainer\Api\AttendanceController;
+use App\Http\Controllers\Trainer\Api\ClassController;
 use App\Http\Controllers\Trainer\Api\StudentGradingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,5 +55,11 @@ Route::post('get_assessment_sessions', [AssessmentController::class, 'getAssessm
 Route::post('assessment_student_lists', [AssessmentController::class, 'assessmentStudentLists']);
 Route::post('mark_assessment', [AssessmentController::class, 'markAssessment']);
 Route::post('update_assessment', [AssessmentController::class, 'updateAssessment']);
+
+Route::post('get_swimming_classes', [ClassController::class, 'getClasses']);
 // end student grading
 // VqjQjX0ioI
+
+
+// promote request
+// get classes

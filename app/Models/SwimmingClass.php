@@ -11,6 +11,8 @@ class SwimmingClass extends Model
     use HasFactory,SoftDeletes;
     protected $fillable = ['name', 'user_id', 'no_of_student', 'age_group', 'color', 'status', 'price'];
 
+    public const ACTIVE = 'Active';
+
     /**
      * Get the calss images.
      */
