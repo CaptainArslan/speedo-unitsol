@@ -291,8 +291,10 @@
                                                         <div class="card-inner">
                                                             <div class="sp-plan-head-group">
                                                                 <div class="sp-plan-amount">
+                                                                    @if (!$payment_informations->isEmpty())
                                                                     <button type="button" onclick="checkPromoCode(event,'{{ url('admin/promo-code') }}')" class="btn btn-secondary"><span>Apply</span>
                                                                         <em class="icon ni ni-arrow-long-right"></em></button>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div><!-- .card-inner -->
@@ -391,9 +393,11 @@
                                                     <div class="sp-plan-head-group mt-4">
                                                         <div class="sp-plan-amount">
                                                             @if (!$records->isEmpty())
+                                                            @if (!$payment_informations->isEmpty())
                                                             <button type="button" onclick="addCheckout(event,'post','{{ url('admin/customer-informations/'.$user->id.'/checkout') }}','{{ url('admin/customer-informations/'.$user->id.'/student-booking') }}','add-checkout')" class="btn btn-secondary">
                                                                 Book Now<em class="icon ni ni-arrow-long-right"></em>
                                                             </button>
+                                                            @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -425,6 +429,7 @@
         loadingStart()
 
         let from = document.getElementById(data);
+        console.log(from)
         let record = new FormData(from)
         var students = [];
         $("#cabintable > tbody > tr").each(function() {
@@ -488,6 +493,7 @@
                 code: code,
             },
             success: function(response) {
+                console.log(response);
                 // let total = $('#totalCart').val();
                 let total = @json($price);
                 let annual_fee = @json($annual_fee);
@@ -496,6 +502,7 @@
                     let promo_discount = response.data;
                     if (promo_discount > discount_apply) {
                         let discount = (parseInt(total) * response.data) / 100;
+                        console.log(discount);
 
                         let tolat_price = (total[0] - discount) + annual_fee;
                         let tax_total = (tolat_price * 5) / 100;

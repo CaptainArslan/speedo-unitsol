@@ -256,8 +256,6 @@ class CustomerInformationController extends Controller
 
     public function addStudent(Request $request)
     {
-        // dd(!isset($request->register_as_student_id));
-
         $request->validate([
             'first_name' => 'string|required',
             'last_name' => 'string|required',

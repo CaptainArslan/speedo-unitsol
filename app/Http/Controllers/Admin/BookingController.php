@@ -47,7 +47,6 @@ class BookingController extends Controller
                         $name="<a href='$url/$r->id/edit' class='toggle' data-target='editClass'><span>$booking_name</span></a>";
                     }else{
                         $name="<a href='#' class='toggle' data-target='editClass'><span>$booking_name</span></a>";
-
                     }
                     $edit=$user->can('edit_booking')?
                         "<li><a href='$url/$r->id/edit' class='toggle' data-target='editClass'><em
@@ -59,9 +58,9 @@ class BookingController extends Controller
                                 <ul class='nk-tb-actions gx-1'>
                                 <li>
                                     <div class='drodown'>
-                                        <a href='#'
-                                            class='dropdown-toggle btn btn-sm btn-icon btn-trigger'
-                                            data-toggle='dropdown'><em class='icon ni ni-more-h'></em></a>
+                                        <a href='#' class='dropdown-toggle btn btn-sm btn-icon btn-trigger' data-toggle='dropdown'>
+                                            <em class='icon ni ni-more-h'></em>
+                                        </a>
                                         <div class='dropdown-menu dropdown-menu-right'>
                                             <ul class='link-list-opt no-bdr'>
                                             $edit
@@ -78,7 +77,7 @@ class BookingController extends Controller
                         'student' => $r->studentTermsActive?->student->name,
                         'created_at' => $r->created_at->format('M d,Y'),
                         'price' => $r->getPrice(),
-                         'status' => $r->getStatus(),
+                         'status' => $r->getOrderStatus(),
                         'actions' => $actions,
 
                     ];

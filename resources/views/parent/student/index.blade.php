@@ -137,6 +137,7 @@
                                                 <h6>Class Level
                                                     @if($student?->assessmentRequest?->is_approved == false)
                                                     <sup class="text-danger" style="font-size: 63%!important;">Waiting Confirmation</sup>
+                                                    
                                                     @else
                                                     <sup><em class="icon ni ni-check-circle-fill "></em></sup>
                                                     @endif
@@ -461,12 +462,10 @@
         $(".welcome-container-bg").hide();
         setTimeout(function() {
             if (total == 0) {
-                window.location = '{{ url('
-                parent / manage - bookings ') }}';
+                window.location = "{{ url('parent/manage-bookings') }}";
             } else {
 
-                window.location = '{{ url('
-                parent / students ') }}';
+                window.location = "{{ url('parent/students ') }}";
             }
         });
     }

@@ -12,8 +12,10 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'discount',
-        'type',
+        'payment_type',
+        'payment_status',
         'tax',
+        'admin_id',
     ];
     public function orderDetail()
     {

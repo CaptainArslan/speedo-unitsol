@@ -318,7 +318,21 @@
                                                     <h6 class="title">Payment</h6>
                                                 </div>
                                             </div>
-                                            <div class="sp-plan-payopt">
+
+                                            <div class="sp-plan-head-group mt-2">
+                                                <div class="sp-plan-head">
+                                                    <label for="online"> Card</label>
+                                                    <input type="radio" name="payment_type" id="online" value="stripe" onclick="showCardPayment()" checked>
+                                                    &nbsp;&nbsp;
+                                                    <label for="Pay at venue"> Pay at venue</label>
+                                                    <input type="radio" name="payment_type" id="venue" value="pay at venue" onclick="hideCardPayment()">
+
+                                                    <!-- Paid or pending -->
+                                                    <input type="hidden" name="payment_status" id="payment-status" value="paid">
+                                                </div>
+                                            </div>
+
+                                            <div class="sp-plan-payopt" id="card-payment">
                                                 <div class="cc-pay">
                                                     {{-- <h6 class="title">Pay With</h6> --}}
                                                     <ul class="cc-pay-method">
@@ -384,7 +398,6 @@
                                                                 </ul>
                                                             </div>
                                                         </li>
-
                                                     </ul>
                                                 </div>
                                             </div>
@@ -396,9 +409,10 @@
                                                 <div class="sp-plan-amount">
                                                     @if (!$records->isEmpty())
                                                     @if (!$payment_informations->isEmpty())
-                                                    <button type="button" onclick="addCheckout(event,'post','{{ url('parent/checkouts') }}','{{ url('parent/my-bookings') }}','add-checkout')" class="btn btn-secondary"><span>Pay
-                                                            Now</span>
-                                                        <em class="icon ni ni-arrow-long-right"></em></button>
+                                                    <button type="button" onclick="addCheckout(event,'post','{{ url('parent/checkouts') }}','{{ url('parent/my-bookings') }}','add-checkout')" class="btn btn-secondary">
+                                                        <span id="btn-payment">Pay Now</span>
+                                                        <em class="icon ni ni-arrow-long-right"></em>
+                                                    </button>
                                                     @endif
                                                     @endif
                                                 </div>
@@ -524,6 +538,31 @@
                 }
             },
         });
+    }
+
+    function showCardPayment() {
+        var cardPayment = document.getElementById("card-payment");
+        cardPayment.style.display = "block";
+        document.getElementById("btn-payment").innerHTML = "Pay Now";
+        document.getElementById("payment-status").value = "paid";        
+
+        // Enable card payment inputs
+        var cardInputs = cardPayment.getElementsByTagName("input");
+        for (var i = 0; i < cardInputs.length; i++) {
+            cardInputs[i].disabled = false;
+        }
+    }
+
+    function hideCardPayment() {
+        var cardPayment = document.getElementById("card-payment");
+        cardPayment.style.display = "none";
+        document.getElementById("btn-payment").innerHTML = "Book Now";
+        document.getElementById("payment-status").value = "pending";
+        // Disable card payment inputs
+        var cardInputs = cardPayment.getElementsByTagName("input");
+        for (var i = 0; i < cardInputs.length; i++) {
+            cardInputs[i].disabled = true;
+        }
     }
 </script>
 

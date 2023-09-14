@@ -150,7 +150,7 @@ class CheckoutController extends Controller
     {
         // $user = auth()->user();
         $request->validate([
-            'type' => 'required',
+            'payment_type' => 'required',
             // 'user_payment_information_id' => 'required',
             // 'term_condition' => 'required',
         ]);
@@ -182,7 +182,9 @@ class CheckoutController extends Controller
         // $user = auth()->user();
         $order = Order::create([
             'user_id' => $user->id,
-            'type' => $request->type,
+            'admin_id' => Auth::user()->id,
+            'payment_type' => $request->payment_type,
+            'payment_status' => 'paid',
         ]);
         $assessment_discount = 0;
         $student_discount = [];

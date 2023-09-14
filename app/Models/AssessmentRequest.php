@@ -22,9 +22,20 @@ class AssessmentRequest extends Model
     ];
     public function getStatus()
     {
-        return $this->status == 'Enroll Now' ? "<span class='badge badge-success ml-2 text-white'>Enrolled</span>"
+        if ($this->is_approved == false) {
+            return "<span class='badge badge-warning ml-2 text-white'>Pending Confirmation</span>";
+        } else {
+            return $this->status == 'Enroll Now' ? "<span class='badge badge-success ml-2 text-white'>Enrolled</span>"
             : "<span class='badge badge-warning ml-2 text-white'>$this->status</span>";
+        }
     }
+
+    // public function getStatus()
+    // {
+    //     return $this->status == 'Enroll Now' ? "<span class='badge badge-success ml-2 text-white'>Enrolled</span>"
+    //         : "<span class='badge badge-warning ml-2 text-white'>$this->status</span>";
+    // }
+
     public function getStatusList()
     {
 

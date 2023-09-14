@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Cart;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
@@ -149,9 +150,10 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $user = auth()->user();
         $request->validate([
-            'user_payment_information_id' => 'required',
+            'user_payment_information_id' => 'nullable',
             'term_condition' => 'required',
         ]);
         $students = [];
@@ -175,12 +177,16 @@ class CheckoutController extends Controller
             }
             $code_discount = $code?->discount;
         }
-        $payment_information = UserPaymentInformation::find($request->user_payment_information_id);
-        $paymentMethod = $payment_information->payment_method;
+        if (isset($request->user_payment_information_id)) {
+            $payment_information = UserPaymentInformation::find($request->user_payment_information_id);
+            $paymentMethod = $payment_information->payment_method;
+        }
+        // dd($request->all());
         $user = auth()->user();
         $order = Order::create([
             'user_id' => Auth::id(),
-
+            'payment_type' => $request->payment_type,
+            'payment_status' => $request->payment_status,
         ]);
         $assessment_discount = 0;
         $student_discount = [];
@@ -309,9 +315,9 @@ class CheckoutController extends Controller
 
         // promo code discount
         $value = explode(',', Cart::subtotal());
-        if(isset($value[1])){
+        if (isset($value[1])) {
             $price = explode('.', $value[0] . $value[1]);
-        }else{
+        } else {
             $price = explode('.', $value[0]);
         }
         // $price = explode('.', $value[0]);
@@ -334,34 +340,43 @@ class CheckoutController extends Controller
         //     $total_price_after_assesment = explode('.', $price_after_assesment[0]);
         // }
         // dd($total_price,$total_price_after_assesment,$total_price_after_assesment != 0 ? $total_price_after_assesment[0] : $total_price[0]);
-        $user->createOrGetStripeCustomer();
-        $user->updateDefaultPaymentMethod($paymentMethod);
-        $user->charge($pay_total[0], $paymentMethod);
+        if (isset($paymentMethod)) {
+            $user->createOrGetStripeCustomer();
+            $user->updateDefaultPaymentMethod($paymentMethod);
+            $user->charge($pay_total[0], $paymentMethod);
+        }
+        // $user->createOrGetStripeCustomer();
+        // $user->updateDefaultPaymentMethod($paymentMethod);
+        // $user->charge($pay_total[0], $paymentMethod);
+
         Cart::destroy();
         foreach ($order->orderDetail as $record_email) {
             foreach ($record_email->studentTerms->where('status', 'on') as $student_term) {
-
-                $booking_email = [
-                    'email' => $user->email,
-                    'student_name' => $student_term->student?->name,
-                    'venue_name' => $student_term->venueName(),
-                    'location' => $student_term->venueLocation(),
-                    'date' => date('M d,Y', strtotime($student_term->getStartDate())) . ' to ' . date('M d,Y', strtotime($student_term->getEndDate())),
-                ];
-                dd($student_term->term->toArray());
-                $payment_email = [
-                    'email' => $user->email,
-                    'name' => $user->first_name . ' ' . $user->last_name,
-                    'student_name' => $student_term->student?->name,
-                    'payment' => $record_email->price,
-                    'trainer' => $student_term->trainerName(),
-                    'payment_type' => $student_term->className() . ' - Speedo',
-                    'location' => $student_term->venueLocation(),
-                    'level' => $student_term->getSwimmingClassName() . ' , ' . $student_term->getTime() . ' , ' .
-                        $student_term->getClassType() . ' ( ' . $student_term->getTermDays() . ' )',
-                ];
-                Mail::to($user->email)->send(new BookingConfirmationEmail($booking_email));
-                Mail::to($user->email)->send(new PaymentConfirmationEmail($payment_email));
+                try {
+                    $booking_email = [
+                        'email' => $user->email,
+                        'student_name' => $student_term->student?->name,
+                        'venue_name' => $student_term->venueName(),
+                        'location' => $student_term->venueLocation(),
+                        'date' => date('M d,Y', strtotime($student_term->getStartDate())) . ' to ' . date('M d,Y', strtotime($student_term->getEndDate())),
+                    ];
+                    // dd($student_term->term->toArray());
+                    $payment_email = [
+                        'email' => $user->email,
+                        'name' => $user->first_name . ' ' . $user->last_name,
+                        'student_name' => $student_term->student?->name,
+                        'payment' => $record_email->price,
+                        'trainer' => $student_term->trainerName(),
+                        'payment_type' => $student_term->className() . ' - Speedo',
+                        'location' => $student_term->venueLocation(),
+                        'level' => $student_term->getSwimmingClassName() . ' , ' . $student_term->getTime() . ' , ' .
+                            $student_term->getClassType() . ' ( ' . $student_term->getTermDays() . ' )',
+                    ];
+                    Mail::to($user->email)->send(new BookingConfirmationEmail($booking_email));
+                    Mail::to($user->email)->send(new PaymentConfirmationEmail($payment_email));
+                } catch (\Throwable $th) {
+                    Log::error('Error Occured while sending email to user' . $th->getMessage());
+                }
             }
         }
         return response()->json(

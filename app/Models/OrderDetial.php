@@ -80,6 +80,17 @@ class OrderDetial extends Model
         }
         return  "<span class='badge badge-success ml-2 text-white'>$status</span>";
     }
+    
+    public function getOrderStatus()
+    {
+        $status = $this->order->payment_status;
+        if ($status == 'paid') {
+            $status = "<span class='badge badge-success ml-2 text-white'>$status</span>";
+        } else {
+            $status = "<span class='badge badge-danger ml-2 text-white'>$status</span>";
+        }
+        return $status;
+    }
 
     public function customerName()
     {
