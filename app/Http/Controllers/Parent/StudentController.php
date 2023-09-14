@@ -77,8 +77,6 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        // dd(!isset($request->register_as_student_id));
-
         $request->validate([
             'first_name' => 'string|required',
             'last_name' => 'string|required',

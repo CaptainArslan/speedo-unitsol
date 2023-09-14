@@ -350,7 +350,6 @@ Route::middleware('super_admin')->prefix('admin')->group(function () {
     // students urls
     Route::get('students', [AdminStudentController::class, 'index']);
     Route::get('students/{id}', [AdminStudentController::class, 'show']);
- 
     Route::get('students/{id}/edit', [AdminStudentController::class, 'edit']);
     Route::post('students/{id}', [AdminStudentController::class, 'update']);
     Route::post('change_assessment_status/{id}', [AdminStudentController::class, 'changeAssessmentStatus']);

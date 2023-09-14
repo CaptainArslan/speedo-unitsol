@@ -334,7 +334,6 @@ class CustomerInformationController extends Controller
             ]);
         }
 
-
         if ($request->q) {
             return response()->json(
                 [

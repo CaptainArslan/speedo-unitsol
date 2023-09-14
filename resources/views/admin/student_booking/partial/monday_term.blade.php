@@ -62,7 +62,7 @@
                 @endif
                 <div class="modal modal_close" id="displayClassMondayDetail{{ $term->id }}">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content us-model-content">
+                        <div class="modal-content" style="position: fixed;bottom: 10%;width: 75%;left: 16%;z-index: 1111111111111111111111111;">
                             <div class="modal-body" style="padding: 10;">
                                 <div class="nk-modal">
                                     <div class="row">
