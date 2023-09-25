@@ -25,6 +25,16 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function CustomerOrderBalance()
+    {
+        return $this->hasMany(CustomerOrderBalance::class, 'order_id');
+    }
+
+    public function getUserName(){
+        return $this->user->first_name . '  ' . $this->user?->last_name;
+    }
+
     public function getStudentNames()
     {
         // $name = '';

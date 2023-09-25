@@ -142,7 +142,8 @@
                                                                                                 </div>
                                                                                                 @endif
                                                                                             </td>
-                                                                                            <td>{{ $item->name }}
+                                                                                            <td>
+                                                                                                {{ $item->name }}
                                                                                             </td>
 
                                                                                             @foreach ($item->studentTerms->where('status', 'on') as $student_term)
@@ -154,7 +155,8 @@
                                                                                             <td>{{ $student_term->day }}</td>
                                                                                             {{-- <td>{{ $student_term->term?->dayNames() }}
                                         </td> --}}
-                                        <td>{{ $student_term->term?->timing->name . ' at ' . date('h:i A', strtotime($student_term->term?->timing->start_time)) }}
+                                        <td>
+                                            {{ $student_term->term?->timing->name . ' at ' . date('h:i A', strtotime($student_term->term?->timing->start_time)) }}
                                         </td>
 
                                         <td>{{ $student_term->no_of_class }}
@@ -189,7 +191,6 @@
                                         <td>{{ $item->price }}
                                         </td>
                                         @endforeach
-
                                         @if ($item->type == 'product')
                                         <td></td>
                                         <td></td>
@@ -204,9 +205,7 @@
                                         <td>{{ $item->price * $item->qty }}
                                         </td>
                                         @endif
-
                                         {{-- <td></td> --}}
-
                                     </tr>
                                     <?php
                                     $i++;

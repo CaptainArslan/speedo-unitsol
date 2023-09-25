@@ -78,6 +78,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Designation::class, 'designation_id');
     }
+
+    public function CustomerOrderBalance()
+    {
+        return $this->hasOne(CustomerOrderBalance::class);
+    }
+
     public function getStatus()
     {
         return $this->status == 'Active' ? "<span class='badge badge-success ml-2 text-white'>Active</span>"

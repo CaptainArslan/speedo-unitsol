@@ -237,6 +237,7 @@ Route::middleware('super_admin')->prefix('admin')->group(function () {
 
     // Booking payment
     Route::get('bookings/{id}/order/payment', [BookingController::class, 'bookingPayment']);
+    Route::post('bookings/{order}/payment/update', [BookingController::class, 'updateBookingPayment']);
 
     // end  bookings urls
     Route::resource('reports', ReportController::class);

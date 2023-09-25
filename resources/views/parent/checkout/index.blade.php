@@ -73,6 +73,7 @@
                                                     $student_discount = [];
                                                     $ids = [];
                                                     $credit = 0;
+                                                    $grand_total = 0;
                                                     ?>
                                                     @foreach ($records as $item)
                                                     <?php
@@ -263,11 +264,12 @@
                                                         // $discount = ($price[0] * $discount_apply) / 100;
                                                         // $tolat_price = round($price[0] - $discount, 2);
                                                         $tolat_price = $total + $tax_total;
+                                                        $grand_total = $tolat_price - $credit;
                                                         ?>
                                                         <td colspan="5"></td>
                                                         <td colspan="4">Grand Total</td>
                                                         <input type="number" hidden id="totalCart" value="{{ $price[0] }}">
-                                                        <td><strong id="totalAmount">{{ 'AED ' . $tolat_price - $credit }}</strong>
+                                                        <td><strong id="totalAmount">{{ 'AED ' . $grand_total }}</strong>
                                                         </td>
                                                     </tr>
                                                 </tfoot>
@@ -328,11 +330,16 @@
                                                     <input type="radio" name="payment_type" id="venue" value="pay at venue" onclick="hideCardPayment()">
 
                                                     <!-- Paid or pending -->
-                                                    <input type="hidden" name="payment_status" id="payment-status" value="paid">
+                                                    <!-- <input type="hidden" name="payment_status" id="payment-status" value="paid"> -->
                                                 </div>
                                             </div>
 
                                             <div class="sp-plan-payopt" id="card-payment">
+                                                <div class="mb-3">
+                                                    <span for="payment_amount">Enter Amount to Pay </span>
+                                                    <input type="number" class="form-control" name="payment_amount" value="0" min="100" max="{{ $grand_total }}">
+                                                    <input type="hidden" class="form-control" name="max_amount" value="{{ $grand_total }}" >
+                                                </div>
                                                 <div class="cc-pay">
                                                     {{-- <h6 class="title">Pay With</h6> --}}
                                                     <ul class="cc-pay-method">
@@ -403,7 +410,7 @@
                                             </div>
                                         </div><!-- .card-inner -->
                                         <div class="card-inner">
-                                            <p class=" text-blue">Agree Term & Conditions : <input type="checkbox" name="term_condition"> </p>
+                                            <label class=" text-blue" for="term_condition" >Agree Term & Conditions : <input type="checkbox" name="term_condition" id="term_condition"> </label>
                                             <div class="sp-plan-head-group">
 
                                                 <div class="sp-plan-amount">
@@ -544,7 +551,7 @@
         var cardPayment = document.getElementById("card-payment");
         cardPayment.style.display = "block";
         document.getElementById("btn-payment").innerHTML = "Pay Now";
-        document.getElementById("payment-status").value = "paid";        
+        document.getElementById("payment-status").value = "paid";
 
         // Enable card payment inputs
         var cardInputs = cardPayment.getElementsByTagName("input");

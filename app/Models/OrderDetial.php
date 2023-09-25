@@ -86,6 +86,8 @@ class OrderDetial extends Model
         $status = $this->order->payment_status;
         if ($status == 'paid') {
             $status = "<span class='badge badge-success ml-2 text-white'>$status</span>";
+        } else if ($status == 'partial') {
+            $status = "<span class='badge badge-warning ml-2 text-white'>$status</span>";
         } else {
             $status = "<span class='badge badge-danger ml-2 text-white'>$status</span>";
         }

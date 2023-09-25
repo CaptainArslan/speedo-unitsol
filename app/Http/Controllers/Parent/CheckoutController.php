@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\BookingConfirmationEmail;
 use App\Mail\PaymentConfirmationEmail;
 use App\Models\AssessmentRequest;
+use App\Models\CustomerOrderBalance;
 use App\Models\Order;
 use App\Models\OrderDetial;
 use App\Models\PromoCode;
@@ -22,6 +23,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Ramsey\Uuid\Type\Integer;
 
 class CheckoutController extends Controller
 {
@@ -150,12 +152,32 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $user = auth()->user();
         $request->validate([
             'user_payment_information_id' => 'nullable',
             'term_condition' => 'required',
+            'payment_type' => 'required',
+            'payment_amount' => [
+                'nullable',
+                'required_if:payment_type,stripe',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('payment_type') === 'stripe') {
+                        // Check the minimum and maximum values based on your conditions
+                        if ($value < 100) {
+                            $fail('Payment amount should be greater than or equal to AED.100');
+                        }
+                        if ($value > $request->input('max_amount')) {
+                            $fail('Payment amount should be less than or equal to ' . $request->input('max_amount') . ' (Grand total Amount)');
+                        }
+                    }
+                },
+            ],
+        ], [
+            'term_condition.required' => 'The terms and conditions field is required.',
         ]);
+
+
         $students = [];
         if ($request->students) {
             foreach ($request->students as $student) {
@@ -186,7 +208,6 @@ class CheckoutController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'payment_type' => $request->payment_type,
-            'payment_status' => $request->payment_status,
         ]);
         $assessment_discount = 0;
         $student_discount = [];
@@ -329,25 +350,38 @@ class CheckoutController extends Controller
         $total_price = explode('.', $discount_price[0]);
         $tax_amount = ($total_price[0] * 5) / 100;
         $pay_total = explode('.', $total_price[0] + $tax_amount - $credit);
+
+        $orderStatus = $this->getstatus($pay_total[0], $request->payment_amount);
+
         $order->update([
             'discount' => $discount,
             'tax' => $tax_amount,
+            'payment_status' => $orderStatus,
         ]);
+
         // $total_price_after_assesment = 0;
         // if ($assessment_discount != 0) {
         //     $discount_on_assessment = ($total_price[0] * $assessment_discount) / 100;
         //     $price_after_assesment = explode(',', $total_price[0] - $discount_on_assessment);
         //     $total_price_after_assesment = explode('.', $price_after_assesment[0]);
         // }
-        // dd($total_price,$total_price_after_assesment,$total_price_after_assesment != 0 ? $total_price_after_assesment[0] : $total_price[0]);
+
+        $balanceData = [
+            'user_id' => $user->id,
+            'order_id' => $order->id,
+            'balance' => $pay_total[0] - ($request->payment_amount ?? 0),
+            'received_amount' => $request->payment_amount ?? 0,
+            'payment_type' => null,
+        ];
+
         if (isset($paymentMethod)) {
             $user->createOrGetStripeCustomer();
             $user->updateDefaultPaymentMethod($paymentMethod);
             $user->charge($pay_total[0], $paymentMethod);
+            $balanceData['payment_type'] = 'stripe';
         }
-        // $user->createOrGetStripeCustomer();
-        // $user->updateDefaultPaymentMethod($paymentMethod);
-        // $user->charge($pay_total[0], $paymentMethod);
+
+        CustomerOrderBalance::create($balanceData);
 
         Cart::destroy();
         foreach ($order->orderDetail as $record_email) {
@@ -386,5 +420,16 @@ class CheckoutController extends Controller
             ],
             200
         );
+    }
+
+    private function getStatus(int $grandTotal, int $orderPayment): string
+    {
+        if ($grandTotal === $orderPayment && $orderPayment > 0) {
+            return 'paid';
+        } elseif ($grandTotal > $orderPayment && $orderPayment > 0) {
+            return 'partial';
+        } else {
+            return 'pending';
+        }
     }
 }

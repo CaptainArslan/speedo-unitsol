@@ -13,6 +13,7 @@ use App\Models\TermBaseBooking;
 use Yajra\DataTables\DataTables;
 use App\Models\AssessmentRequest;
 use App\Http\Controllers\Controller;
+use App\Models\CustomerOrderBalance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
@@ -188,7 +189,59 @@ class BookingController extends Controller
 
     public function bookingPayment($id)
     {
-        $records = Order::findOrFail($id);
+        $order = Order::findOrFail($id);
+        // dd($order->CustomerOrderBalance->toArray());
         return view(self::VIEW . '.booking_payment', get_defined_vars());
+    }
+
+    public function updateBookingPayment(Request $request, Order $order)
+    {
+        // Get the last balance from the order's CustomerOrderBalance
+        $lastBalance = $order->CustomerOrderBalance->last()->balance;
+
+        // Validation rules and custom error messages
+        $validationRules = [
+            'payment_amount' => [
+                'required',
+                'numeric',
+                'max:' . $lastBalance,
+                'gt:0', // Custom rule: Payment amount must be greater than 0
+            ],
+            'payment_type' => 'required|string|in:cash,card',
+        ];
+
+        $validationMessages = [
+            'payment_amount.required' => 'Payment amount is required.',
+            'payment_amount.numeric' => 'Payment amount must be a numeric value.',
+            'payment_amount.max' => 'Payment amount should be less than or equal to the balance amount of AED ' . number_format($lastBalance, 2),
+            'payment_amount.gt' => 'Payment amount must be greater than 0.',
+            'payment_type.required' => 'Payment type is required.',
+            'payment_type.in' => 'Payment type should be either cash or card.',
+        ];
+
+        // Validate the request data
+        $request->validate($validationRules, $validationMessages);
+
+        // Create a new CustomerOrderBalance record
+        $lastbalance = CustomerOrderBalance::create([
+            'user_id' => $order->user_id,
+            'admin_id' => Auth::id(),
+            'order_id' => $order->id,
+            'balance' => $lastBalance - $request->payment_amount,
+            'received_amount' => $request->payment_amount,
+            'payment_type' => $request->payment_type,
+        ]);
+
+        // Update the payment_status if the balance is now zero
+        if ($lastbalance->balance == 0) {
+            $order->update([
+                'payment_status' => 'paid',
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Payment updated successfully.',
+        ], 200);
     }
 }

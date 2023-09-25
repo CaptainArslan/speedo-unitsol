@@ -134,6 +134,53 @@ function addFormData(e, method, url, redirectUrl, data) {
     });
 
 }
+
+function orderPaymentUpdate(e, method, url, redirectUrl, data) {
+    loadingStart()
+
+    let from = document.getElementById(data);
+    console.log(from)
+    let record = new FormData(from)
+    e.preventDefault()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: method,
+        url: url,
+        data: record,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            loadingStop()
+            if (response.status != false) {
+                showSuccess(response.message, 'success')
+
+                setTimeout(function () {
+                    window.location = redirectUrl;
+                }, 1000);
+            } else {
+                showWarn(response.message, 'error');
+            }
+
+        },
+        error: function (xhr) {
+            loadingStop()
+            console.log((xhr.responseJSON.errors));
+            let data = '';
+            $.each(xhr.responseJSON.errors, function (key, value) {
+                data += '</br>' + value
+            })
+            showWarn(data)
+
+        }
+    });
+
+}
+
 function addFormDataParent(e, method, url, redirectUrl, data) {
     loadingStart()
     let from = document.getElementById(data);
