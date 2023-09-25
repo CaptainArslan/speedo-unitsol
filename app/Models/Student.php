@@ -39,7 +39,7 @@ class Student extends Model
     }
     public function studentName()
     {
-        $name = $this->name;
+        $name = $this->name . ' ' . $this?->last_name;
         return  "<span class='badge badge-dot badge-primary'>$name</span>";
     }
     public function getFullName()

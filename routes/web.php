@@ -234,6 +234,10 @@ Route::middleware('super_admin')->prefix('admin')->group(function () {
     Route::delete('bookings/{id}', [BookingController::class, 'destroy']);
     Route::post('check-slots/{id}', [BookingController::class, 'checkSlots']);
     Route::post('get_timings/{id}', [BookingController::class, 'getTiming']);
+
+    // Booking payment
+    Route::get('bookings/{id}/order/payment', [BookingController::class, 'bookingPayment']);
+
     // end  bookings urls
     Route::resource('reports', ReportController::class);
 

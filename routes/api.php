@@ -57,9 +57,6 @@ Route::post('mark_assessment', [AssessmentController::class, 'markAssessment']);
 Route::post('update_assessment', [AssessmentController::class, 'updateAssessment']);
 
 Route::post('get_swimming_classes', [ClassController::class, 'getClasses']);
+Route::post('promote_student', [AssessmentController::class, 'promoteStudent']);
 // end student grading
 // VqjQjX0ioI
-
-
-// promote request
-// get classes

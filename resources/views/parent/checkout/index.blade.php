@@ -300,10 +300,10 @@
                                         <div class="card-inner">
                                             <div class="sp-plan-head-group">
                                                 <div class="sp-plan-amount">
-                                                    @if (!$payment_informations->isEmpty())
+                                                    {{-- @if (!$payment_informations->isEmpty()) --}}
                                                     <button type="button" onclick="checkPromoCode(event,'{{ url('parent/promo-code') }}')" class="btn btn-secondary"><span>Apply</span>
                                                         <em class="icon ni ni-arrow-long-right"></em></button>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 </div>
                                             </div>
                                         </div><!-- .card-inner -->
@@ -408,12 +408,12 @@
 
                                                 <div class="sp-plan-amount">
                                                     @if (!$records->isEmpty())
-                                                    @if (!$payment_informations->isEmpty())
+                                                    {{-- @if (!$payment_informations->isEmpty()) --}}
                                                     <button type="button" onclick="addCheckout(event,'post','{{ url('parent/checkouts') }}','{{ url('parent/my-bookings') }}','add-checkout')" class="btn btn-secondary">
                                                         <span id="btn-payment">Pay Now</span>
                                                         <em class="icon ni ni-arrow-long-right"></em>
                                                     </button>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                     @endif
                                                 </div>
                                             </div>
