@@ -475,8 +475,11 @@ Route::middleware('parent')->prefix('parent')->group(function () {
     Route::get('my-bookings', [MyBookingController::class, 'index']);
     Route::get('my-bookings/{id}', [MyBookingController::class, 'show']);
     Route::get('order_details/{id}', [MyBookingController::class, 'orderDetail']);
+    Route::get('order_payment/{order}', [MyBookingController::class, 'orderPayment']);
     Route::get('invoice/{id}', [MyBookingController::class, 'invoice']);
     Route::post('my-bookings/{id}', [MyBookingController::class, 'update']);
+
+    Route::post('order/{order}/payment/update', [MyBookingController::class, 'updateBookingPayment']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

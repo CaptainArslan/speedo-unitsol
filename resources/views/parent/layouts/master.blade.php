@@ -84,8 +84,9 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Your Cart</h5>
                     </div>
-                    @if (Cart::count())
+
                     <div id="cart_detail">
+                        @if (Cart::count())
                         @foreach (Cart::content() as $item)
                         <?php
                         if ($item->options->type == 'term') {
@@ -154,17 +155,18 @@
                         </div>
                         @endif
                         @endforeach
+                        <div class="speedo-checkout">
+                            <a class="btn text-white pull-left mr-2" style="background-color:#3097FF !important" href="#" data-dismiss="modal">Add More
+                                Classes</a>
+                            <a class="btn  text-white  pull-right" style="background-color:#3097FF !important" href="{{ url('parent/checkouts') }}">Checkout-></a>
+                        </div>
+                        @else
+                        <div class="text-center mt-2">
+                            <h5>Your cart is empty</h5>
+                        </div>
+                        @endif
                     </div>
-                    <div class="speedo-checkout">
-                        <a class="btn text-white pull-left mr-2" style="background-color:#3097FF !important" href="#" data-dismiss="modal">Add More
-                            Classes</a>
-                        <a class="btn  text-white  pull-right" style="background-color:#3097FF !important" href="{{ url('parent/checkouts') }}">Checkout-></a>
-                    </div>
-                    @else
-                    <div class="text-center mt-2">
-                        <h5>Your cart is empty</h5>
-                    </div>
-                    @endif
+
                 </div>
             </div>
 

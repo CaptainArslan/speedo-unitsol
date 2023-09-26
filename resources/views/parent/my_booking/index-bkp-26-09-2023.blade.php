@@ -31,11 +31,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($orders as $order)
                                     <?php
                                     // $i = 1;
                                     ?>
                                     <tr>
+
+
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->user->first_name . ' ' . $order->user->last_name }}</td>
                                         <td>{{ '('.$order->getStudentNames().')' }}</td>
@@ -101,6 +104,7 @@
                                                                                     Order summary</h3>
                                                                             </div>
                                                                             <div class="table-responsive">
+                                                                                {{-- <table class="datatable-init-export nowrap table" data-export-title="Export"> --}}
                                                                                 <table class="table table-nowrap">
                                                                                     <thead>
                                                                                         <tr>
@@ -126,7 +130,8 @@
                                                                                         ?>
                                                                                         @foreach ($order->orderDetail as $item)
                                                                                         <tr>
-                                                                                            <td>{{ $i }}</td>
+                                                                                            <td>{{ $i }}
+                                                                                            </td>
                                                                                             <td>
                                                                                                 @if ($item->type == 'product')
                                                                                                 <div class="user-avatar sq">
@@ -138,125 +143,148 @@
                                                                                                 </div>
                                                                                                 @endif
                                                                                             </td>
-                                                                                            <td> {{ $item->name }}</td>
-                                                                                            @foreach ($item->studentTerms->where('status', 'on') as $student_term)
-                                                                                            <td>{{ $student_term->student ? $student_term->student->name : '' }} /td>
-                                                                                                @if ($student_term->type == 'term')
-                                                                                            <td>{{ $student_term->term?->venue->name }}</td>
-                                                                                            <td>{{ $student_term->day }}</td>
-                                                                                            <td>{{ $student_term->term?->timing->name . ' at ' . date('h:i A', strtotime($student_term->term?->timing->start_time)) }}</td>
-                                                                                            <td> {{ $student_term->no_of_class }} </td>
-                                                                                            <td> {{ date('M d, Y', strtotime($item->created_at)) }} </td>
-                                                                                            <td>{{ date('M d, Y', strtotime($student_term->term?->end_date)) }} </td>
-                                                                                            @endif
-                                                                                            @if ($student_term->type == 'package')
-                                                                                            <td>{{ $student_term->package?->term->venue->name }} </td>
-                                                                                            <td>{{ $student_term->package?->term->dayNames() }} </td>
-                                                                                            <td>{{ $student_term->package?->term->timing->name . ' at ' . date('h:i A', strtotime($student_term->package?->term->timing->start_time)) }}</td>
-                                                                                            <td>{{ $student_term->package?->no_of_class }}</td>
-                                                                                            <td> {{ date('M d, Y', strtotime($item->created_at)) }} </td>
-                                                                                            <td>{{ date('M d, Y', strtotime($student_term->package?->end_date)) }} </td>
-                                                                                            @endif
-                                                                                            <td>{{ $item->price }} </td>
-                                                                                            <td>{{ $item->qty }}</td>
-                                                                                            <td>{{ $item->price }}</td>
-                                                                                            @endforeach
-                                                                                            @if ($item->type == 'product')
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td>{{ $item->price }}
-                                                                                            </td>
-                                                                                            <td>{{ $item->qty }}
-                                                                                            </td>
                                                                                             <td>
-                                                                                                {{ $item->price * $item->qty }}
+                                                                                                {{ $item->name }}
                                                                                             </td>
-                                                                                            @endif
-                                                                                            {{-- <td></td> --}}
-                                                                                        </tr>
-                                                                                        <?php
-                                                                                        $i++;
-                                                                                        $sub_total += $item->price * $item->qty;
-                                                                                        ?>
-                                                                                        @endforeach
-                                                                                    </tbody>
-                                                                                    <tfoot>
-                                                                                        <tr>
-                                                                                            <td colspan="10" class="border-0 ">
-                                                                                            </td>
-                                                                                            <td colspan="1" class="border-0 ">
-                                                                                                <h6>Sub Total
-                                                                                                </h6>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                {{ $sub_total }}
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td colspan="10">
-                                                                                            </td>
-                                                                                            <td colspan="1">
-                                                                                                <h6>Discount
-                                                                                                </h6>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                {{ $order->discount }}
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td colspan="10" class="border-0 ">
-                                                                                            </td>
-                                                                                            <td colspan="1">
-                                                                                                <h6>Tax</h6>
-                                                                                            </td>
-                                                                                            <td> {{ $order?->tax }}
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td colspan="10" class="border-0 ">
-                                                                                            </td>
-                                                                                            <td colspan="1">
-                                                                                                <h6>Total</h6>
-                                                                                            </td>
-                                                                                            <td>AED
-                                                                                                {{ $sub_total + $order?->tax - $order->discount }}
-                                                                                            </td>
-                                                                                        </tr>
 
-                                                                                    </tfoot>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                                                            @foreach ($item->studentTerms->where('status', 'on') as $student_term)
+                                                                                            <td>{{ $student_term->student ? $student_term->student->name : '' }}
+                                                                                            </td>
+                                                                                            @if ($student_term->type == 'term')
+                                                                                            <td>{{ $student_term->term?->venue->name }}
+                                                                                            </td>
+                                                                                            <td>{{ $student_term->day }}</td>
+                                                                                            {{-- <td>{{ $student_term->term?->dayNames() }}
+                                        </td> --}}
+                                        <td>
+                                            {{ $student_term->term?->timing->name . ' at ' . date('h:i A', strtotime($student_term->term?->timing->start_time)) }}
+                                        </td>
+
+                                        <td>{{ $student_term->no_of_class }}
                                         </td>
                                         <td>
-                                            <a href="{{ url('parent/order_payment/' . $order->id) }}" class="btn btn-sm btn-info">
-                                                <em class="icon ni ni-eye "></em>
-                                            </a>
+                                            {{-- date('M d, Y', strtotime($student_term->term?->start_date)) --}}
+                                            {{ date('M d, Y', strtotime($item->created_at)) }}
                                         </td>
+                                        <td>{{ date('M d, Y', strtotime($student_term->term?->end_date)) }}
+                                        </td>
+                                        @endif
+                                        @if ($student_term->type == 'package')
+                                        <td>{{ $student_term->package?->term->venue->name }}
+                                        </td>
+                                        <td>{{ $student_term->package?->term->dayNames() }}
+                                        </td>
+                                        <td>{{ $student_term->package?->term->timing->name . ' at ' . date('h:i A', strtotime($student_term->package?->term->timing->start_time)) }}
+                                        </td>
+                                        <td>{{ $student_term->package?->no_of_class }}
+                                        </td>
+                                        <td>
+                                            {{-- date('M d, Y', strtotime($student_term->package?->start_date)) --}}
+                                            {{ date('M d, Y', strtotime($item->created_at)) }}
+                                        </td>
+                                        <td>{{ date('M d, Y', strtotime($student_term->package?->end_date)) }}
+                                        </td>
+                                        @endif
+                                        <td>{{ $item->price }}
+                                        </td>
+                                        <td>{{ $item->qty }}
+                                        </td>
+                                        <td>{{ $item->price }}
+                                        </td>
+                                        @endforeach
+                                        @if ($item->type == 'product')
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ $item->price }}
+                                        </td>
+                                        <td>{{ $item->qty }}
+                                        </td>
+                                        <td>
+                                            {{ $item->price * $item->qty }}
+                                        </td>
+                                        @endif
+                                        {{-- <td></td> --}}
                                     </tr>
+                                    <?php
+                                    $i++;
+                                    $sub_total += $item->price * $item->qty;
+                                    ?>
                                     @endforeach
 
-                                </tbody>
 
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10" class="border-0 ">
+                                        </td>
+                                        <td colspan="1" class="border-0 ">
+                                            <h6>Sub Total
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            {{ $sub_total }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10">
+                                        </td>
+                                        <td colspan="1">
+                                            <h6>Discount
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            {{ $order->discount }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10" class="border-0 ">
+                                        </td>
+                                        <td colspan="1">
+                                            <h6>Tax</h6>
+                                        </td>
+                                        <td> {{ $order?->tax }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10" class="border-0 ">
+                                        </td>
+                                        <td colspan="1">
+                                            <h6>Total</h6>
+                                        </td>
+                                        <td>AED
+                                            {{ $sub_total + $order?->tax - $order->discount }}
+                                        </td>
+                                    </tr>
+
+                                </tfoot>
                             </table>
                         </div>
-                    </div><!-- .card-preview -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </form>
+</div>
+</div>
+</div>
+</td>
+</tr>
+@endforeach
+
+</tbody>
+
+</table>
+</div>
+</div><!-- .card-preview -->
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection
 @section('scripts')

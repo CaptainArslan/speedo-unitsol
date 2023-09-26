@@ -10,6 +10,7 @@ use App\Models\TermBaseBooking;
 use App\Models\TermBaseBookingPackage;
 use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
@@ -183,7 +184,12 @@ class CartController extends Controller
     {
         $user = auth()->user();
         Cart::destroy();
-        Mail::to($user->email)->send(new IncompeteCheckoutEmail($user));
+        try {
+            Mail::to($user->email)->send(new IncompeteCheckoutEmail($user));
+        } catch (\Throwable $th) {
+            Log::info('Error occured while sending email -> ' . $th->getMessage());
+        }
+        
         return response()->json(
             [
                 'success' => true,
