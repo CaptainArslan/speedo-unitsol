@@ -30,6 +30,11 @@ class AssessmentStudentListResource extends JsonResource
             'class_name' => $this->className(),
             'time' => $this->getTime(),
             'date' => $class_assessment?->date,
+            'payment_status' => $this->orderDetails->order?->payment_status,
+            'remaining_balance' => $this->orderDetails->order->customerOrderBalance()
+                ->orderBy('created_at', 'desc')
+                ->latest()
+                ->first()->balance ?? 0,
             'studentAssessment' => $record!=null?[
                 'message'=>$record['message'],
                 'assessment'=>$record->studentAssessmentDetail,

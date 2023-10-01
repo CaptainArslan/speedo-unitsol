@@ -19,10 +19,12 @@ class GradingStudentListResource extends JsonResource
         $now = Carbon::now();
         $current_date = $now->format('Y-m-d');
         $class_grading = ClassGrading::where('class_id', $request->term_id)->where('type', $request->type)->first();
-        $data=$class_grading?->gradings->where('student_id', $this->student_id)->first();
-        $record=$data?->only('status', 'remarks');
+        $data = $class_grading?->gradings->where('student_id', $this->student_id)->first();
+        $record = $data?->only('status', 'remarks');
         // dd($record);
         return [
+            'id' => $this->id,
+            'order_detail_id' => $this->order_detial_id,
             'student_id' => $this->student?->id,
             'student_name' => $this->student?->name,
             'swim_code' => $this->student?->swim_code,
@@ -32,9 +34,14 @@ class GradingStudentListResource extends JsonResource
             'class_name' => $this->className(),
             'time' => $this->getTime(),
             'date' => $class_grading?->date,
-            'studentGrading' => $record!=null?[
-                'status'=>$record['status'],
-                'remarks'=>$record['remarks'],
+            'payment_status' => $this->orderDetails->order?->payment_status,
+            'remaining_balance' => $this->orderDetails->order->customerOrderBalance()
+                ->orderBy('created_at', 'desc')
+                ->latest()
+                ->first()->balance ?? 0,
+            'studentGrading' => $record != null ? [
+                'status' => $record['status'],
+                'remarks' => $record['remarks'],
             ] : null,
         ];
     }

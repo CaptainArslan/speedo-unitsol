@@ -27,6 +27,11 @@ class SessionStudentListResource extends JsonResource
             'date' => $class_session?->date,
             'class_name' => $this->className(),
             'time' => $this->getTime(),
+            'payment_status' => $this->orderDetails->order?->payment_status,
+            'remaining_balance' => $this->orderDetails->order->customerOrderBalance()
+                ->orderBy('created_at', 'desc')
+                ->latest()
+                ->first()->balance ?? 0,
             'studentAttandance' => $record!=null?[
                 'status'=>$record['status'],
                 'reason'=>$record['late'],

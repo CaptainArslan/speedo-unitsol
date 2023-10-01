@@ -31,7 +31,7 @@ class StudentTerm extends Model
         return $this->belongsTo(TermBaseBookingPackage::class, 'term_id', 'id')->withTrashed();
     }
     public function orderDetails(){
-        return $this->belongsTo(OrderDetial::class, 'order_detail_id');
+        return $this->belongsTo(OrderDetial::class, 'order_detial_id');
     }
 
     public function bookingName(){
