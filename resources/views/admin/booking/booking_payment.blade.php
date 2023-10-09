@@ -210,7 +210,7 @@
                                                             <div class="form-row align-items-center">
                                                                 <div class="col-sm-5 my-1">
                                                                     <label class="sr-only" for="payment-amount">Amouont</label>
-                                                                    <input type="number" class="form-control" name="payment_amount" id="payment-amount" placeholder="Jane Doe" min="1" max="{{ $order->CustomerOrderBalance->last()?->balance }}">
+                                                                    <input type="number" class="form-control" name="payment_amount" id="payment-amount" placeholder="10" min="1" max="{{ $order->CustomerOrderBalance->last()?->balance }}">
                                                                 </div>
                                                                 <div class="col-sm-5 my-1">
                                                                     <label class="sr-only" for="payment-type">Payment Type</label>
@@ -266,8 +266,8 @@
                                                     <tr>
                                                         <td>{{ $key }}</td>
                                                         <td>{{ $balance->order->getUserName() }}</td>
-                                                        <td>AEB.{{ $balance->received_amount }}</td>
-                                                        <td>AEB.{{ $balance->balance }}</td>
+                                                        <td>AED.{{ $balance->received_amount }}</td>
+                                                        <td>AED.{{ $balance->balance }}</td>
                                                         <td>{{ $balance->payment_type ?? 'N/A'}}</td>
                                                         <td>{{ $balance->created_at->format('d, M, Y') }}</td>
                                                     </tr>

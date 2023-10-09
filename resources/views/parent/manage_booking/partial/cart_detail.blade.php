@@ -69,7 +69,10 @@ if ($item->options->type == 'term') {
     $('#displayClassDetail' + @json($item -> id)).modal('show');
 </script>
 @endforeach
-
+<div class="speedo-checkout">
+    <a class="btn text-white pull-left mr-2" style="background-color:#3097FF !important" href="#" data-dismiss="modal">Add More Classes</a>
+    <a class="btn  text-white  pull-right" style="background-color:#3097FF !important" href="{{ url('parent/checkouts') }}">Checkout-></a>
+</div>
 <script>
     $(".count").fadeOut(400, function() {
         $(this).text(@json($count)).fadeIn(400);

@@ -338,7 +338,7 @@
                                                 <div class="mb-3">
                                                     <span for="payment_amount">Enter Amount to Pay </span>
                                                     <input type="number" class="form-control" name="payment_amount" value="0" min="100" max="{{ $grand_total }}">
-                                                    <input type="hidden" class="form-control" name="max_amount" value="{{ $grand_total }}" >
+                                                    <input type="hidden" class="form-control" name="max_amount" value="{{ $grand_total }}">
                                                 </div>
                                                 <div class="cc-pay">
                                                     {{-- <h6 class="title">Pay With</h6> --}}
@@ -365,8 +365,9 @@
                                                             <a href="#" class="btn btn-white btn-outline-light dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
                                                                 <input type="checkbox" checked name="user_payment_information_id" value="{{ $item->id }}" class="from-control mr-4">
                                                                 <em class="icon ni ni-visa"></em>
-                                                                <span><span class="cc-pay-star">****
-                                                                        **** ****</span> 4242</span>
+                                                                <span>
+                                                                    <span class="cc-pay-star">**** **** ****</span> 4242
+                                                                </span>
                                                             </a>
                                                             @endforeach
                                                             @endif
@@ -410,7 +411,7 @@
                                             </div>
                                         </div><!-- .card-inner -->
                                         <div class="card-inner">
-                                            <label class=" text-blue" for="term_condition" >Agree Term & Conditions : <input type="checkbox" name="term_condition" id="term_condition"> </label>
+                                            <label class=" text-blue" for="term_condition">Agree Term & Conditions : <input type="checkbox" name="term_condition" id="term_condition"> </label>
                                             <div class="sp-plan-head-group">
 
                                                 <div class="sp-plan-amount">
