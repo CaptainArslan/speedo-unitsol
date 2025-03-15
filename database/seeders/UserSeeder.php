@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'first_name' => 'dhfopdaf',
-            'middle_name' => 'dhfopdaf',
-            'last_name' => 'dhfopdaf',
-            'email' => 'admin43@gmail.com',
-            'password' => bcrypt('11223344'),
-            'is_admin' => true,
+                'middle_name' => 'dhfopdaf',
+                'last_name' => 'dhfopdaf',
+                'email' => 'admin43@gmail.com',
+                'password' => bcrypt('11223344'),
+                'is_admin' => true,
                 'country_code' => '+971',
             ],
 
